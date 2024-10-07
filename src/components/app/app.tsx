@@ -1,11 +1,11 @@
 import Main from '../../pages/main/main';
 import { PlaceCardEntity } from '../../components/place-card/entities/interfaces';
 
-type Props = {
+type AppProps = {
   places: PlaceCardEntity[];
 };
 
-function App({ places }: Props): JSX.Element {
+function App({ places }: AppProps): JSX.Element {
   return (
     <Main places={places} />
   );
