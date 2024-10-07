@@ -1,5 +1,10 @@
-import Main from '../../pages/main/main';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { PlaceCardEntity } from '../../components/place-card/entities/interfaces';
+import Main from '../../pages/main/main';
+import Login from '../../pages/login/login';
+import Favorites from '../../pages/favorites/favorites';
+import Offer from '../../pages/offer/offer';
+import Error404 from '../../pages/error/404/404';
 
 type AppProps = {
   places: PlaceCardEntity[];
@@ -7,7 +12,15 @@ type AppProps = {
 
 function App({ places }: AppProps): JSX.Element {
   return (
-    <Main places={places} />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Main places={places}/>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/offer/:id" element={<Offer />} />
+        <Route path="/*" element={<Error404 />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
