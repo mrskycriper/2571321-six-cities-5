@@ -5,8 +5,6 @@ import Login from '../../pages/login/login';
 import Favorites from '../../pages/favorites/favorites';
 import Offer from '../../pages/offer/offer';
 import Error404 from '../../pages/error/404/404';
-import AuthorizedRoute from '../auth-checker/auth-checker';
-import React from 'react';
 import AuthChecker from '../auth-checker/auth-checker';
 
 type AppProps = {
@@ -19,9 +17,12 @@ function App({ places }: AppProps): JSX.Element {
       <Routes>
         <Route path="/" element={<Main places={places} />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/favorites" element={
-          <AuthChecker element={<Favorites />} isAuthorized={false}></AuthChecker>
-        } />
+        <Route
+          path="/favorites"
+          element={
+            <AuthChecker element={<Favorites />} isAuthorized={false}></AuthChecker>
+          }
+        />
         <Route path="/offer/:id" element={<Offer />} />
         <Route path="/*" element={<Error404 />} />
       </Routes>

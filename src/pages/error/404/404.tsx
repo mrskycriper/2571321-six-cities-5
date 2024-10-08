@@ -3,7 +3,7 @@ import styles from './styles.module.css';
 
 function Error404(): JSX.Element {
   return (
-    <div className={"page " + styles.errorPage}>
+    <div className={`page ${styles.errorPage}`}>
       <div className={styles.errorBlock}>
         <h1 className={styles.errorCode}>
           404
@@ -16,7 +16,7 @@ function Error404(): JSX.Element {
         Main page
       </Link>
     </div>
-  )
+  );
 }
 
 export default Error404;
