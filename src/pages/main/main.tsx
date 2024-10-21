@@ -5,8 +5,6 @@ type MainProps = {
   offers: OfferEntity[];
 };
 
-const activeOfferId = 'bd040d67-8030-48a8-b47b-0b4f5b30ccd5';
-
 function Main({ offers }: MainProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
@@ -97,7 +95,7 @@ function Main({ offers }: MainProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <OfferList offers={offers} activeOfferId={activeOfferId}/>
+              <OfferList offers={offers}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>

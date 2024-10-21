@@ -1,15 +1,16 @@
+import { MouseEventHandler } from 'react';
 import { OfferEntity } from '@/entities/offer';
 
 type OfferCardProps = {
   offer: OfferEntity;
-  active: boolean;
+  onMouseOver?: MouseEventHandler;
+  onMouseLeave?: MouseEventHandler;
 };
 
-//@ts-ignore Неиспользуемый проп active, будет задействован позже позже
-function OfferCard({ offer, active = false }: OfferCardProps): JSX.Element {
+function OfferCard({ offer, onMouseOver, onMouseLeave }: OfferCardProps): JSX.Element {
   const coverImage = offer.images.filter((el) => el.isCoverImage);
   return (
-    <article className="cities__card place-card">
+    <article className="cities__card place-card" onMouseOver={onMouseOver} onMouseLeave={onMouseLeave}>
       {offer.mark ? (
         <div className="place-card__mark">
           <span>{offer.mark}</span>
