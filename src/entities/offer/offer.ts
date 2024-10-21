@@ -46,6 +46,7 @@ export type OfferReview = {
 
 export type OfferEntity = {
   id: string;
+  city: string;
   images: OfferImage[];
   mark?: OfferMark;
   name: string;

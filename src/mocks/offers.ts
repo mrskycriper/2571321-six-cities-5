@@ -3,6 +3,7 @@ import { OfferEntity } from '@/entities/offer/offer';
 export const offers: OfferEntity[] = [
   {
     id: 'bd040d67-8030-48a8-b47b-0b4f5b30ccd5',
+    city: 'Amsterdam',
     images: [
       {
         id: 1,
@@ -125,6 +126,7 @@ export const offers: OfferEntity[] = [
   },
   {
     id: '1f0686d9-84d4-4131-a21a-631a3905f15b',
+    city: 'Amsterdam',
     images: [
       {
         id: 1,
@@ -221,6 +223,7 @@ export const offers: OfferEntity[] = [
   },
   {
     id: 'd0486eff-de68-4eeb-bdc4-d8070123a6e0',
+    city: 'Amsterdam',
     images: [
       {
         id: 1,
@@ -342,6 +345,7 @@ export const offers: OfferEntity[] = [
   },
   {
     id: '07a16137-7d2a-4e94-bb41-673bea130172',
+    city: 'Amsterdam',
     images: [
       {
         id: 1,
