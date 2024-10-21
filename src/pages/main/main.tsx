@@ -1,4 +1,4 @@
-import PlaceCard from '@/components/place-card/place-card';
+import { PlaceCard } from '@/components/place-card';
 import { OfferEntity } from '@/entities/offer';
 
 type MainProps = {

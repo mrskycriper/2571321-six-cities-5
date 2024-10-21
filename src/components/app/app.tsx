@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Main from '@/pages/main/main';
-import Login from '@/pages/login/login';
-import Favorites from '@/pages/favorites/favorites';
-import Offer from '@/pages/offer/offer';
-import Error404 from '@/pages/error/404/404';
-import AuthChecker from '@/components/auth-checker/auth-checker';
+import { Main } from '@/pages/main';
+import { Login } from '@/pages/login';
+import { Favorites } from '@/pages/favorites';
+import { Offer } from '@/pages/offer';
+import { Error404 } from '@/pages/errors';
+import { AuthChecker } from '@/components/auth-checker';
 import { OfferEntity } from '@/entities/offer';
 
 type AppProps = {
