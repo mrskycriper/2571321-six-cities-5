@@ -1,9 +1,11 @@
-import { PlaceCard } from '@/components/place-card';
+import { OfferList } from '@/components/offer-list';
 import { OfferEntity } from '@/entities/offer';
 
 type MainProps = {
   offers: OfferEntity[];
 };
+
+const activeOfferId = 'bd040d67-8030-48a8-b47b-0b4f5b30ccd5';
 
 function Main({ offers }: MainProps): JSX.Element {
   return (
@@ -95,11 +97,7 @@ function Main({ offers }: MainProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {offers.map((offer) => (
-                  <PlaceCard offer={offer} key={offer.id} />
-                ))}
-              </div>
+              <OfferList offers={offers} activeOfferId={activeOfferId}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
