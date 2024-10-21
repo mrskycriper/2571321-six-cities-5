@@ -1,13 +1,13 @@
 import { useParams } from 'react-router-dom';
 import { useMemo } from 'react';
-import { offers } from '@/mocks/offers';
+import { allOffers } from '@/mocks/offers';
 import { Error404 } from '@/pages/errors';
 
 function Offer(): JSX.Element {
   const { id } = useParams();
 
   const offer = useMemo(() => {
-    return offers.find(({ id: offerId }) => offerId === id);
+    return allOffers.find(({ id: offerId }) => offerId === id);
   }, [id]);
 
   if (!offer) {
