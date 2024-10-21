@@ -4,7 +4,7 @@ export type OfferImage = {
   id: number,
   src: string,
   alt: string,
-  coverImage?: boolean
+  isCoverImage?: boolean
 }
 
 export type OfferMark = 'Premium';

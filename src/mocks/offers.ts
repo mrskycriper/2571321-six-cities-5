@@ -1,6 +1,6 @@
 import { OfferEntity } from "../entities/offer";
 
-const offers: OfferEntity[] = [
+export const offers: OfferEntity[] = [
   {
     id: 'bd040d67-8030-48a8-b47b-0b4f5b30ccd5',
     images: [
@@ -13,7 +13,7 @@ const offers: OfferEntity[] = [
         id: 2,
         src: 'img/apartment-01.jpg',
         alt: 'Photo studio',
-        coverImage: true
+        isCoverImage: true
       },
       {
         id: 3,
@@ -129,7 +129,7 @@ const offers: OfferEntity[] = [
         id: 1,
         src: 'img/room.jpg',
         alt: 'Photo studio',
-        coverImage: true
+        isCoverImage: true
       },
       {
         id: 2,
@@ -234,7 +234,7 @@ const offers: OfferEntity[] = [
         id: 3,
         src: 'img/apartment-02.jpg',
         alt: 'Photo studio',
-        coverImage: true
+        isCoverImage: true
       },
       {
         id: 4,
@@ -359,7 +359,7 @@ const offers: OfferEntity[] = [
         id: 4,
         src: 'img/apartment-03.jpg',
         alt: 'Photo studio',
-        coverImage: true
+        isCoverImage: true
       },
       {
         id: 5,
