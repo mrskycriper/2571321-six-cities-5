@@ -1,4 +1,4 @@
-import { OfferEntity } from '../../entities/offer';
+import { OfferEntity } from '@/entities/offer';
 
 type PlaceCardProps = {
   offer: OfferEntity;

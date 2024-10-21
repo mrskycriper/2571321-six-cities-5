@@ -1,5 +1,5 @@
-import PlaceCard from '../../components/place-card/place-card';
-import { OfferEntity } from '../../entities/offer';
+import PlaceCard from '@/components/place-card/place-card';
+import { OfferEntity } from '@/entities/offer';
 
 type MainProps = {
   offers: OfferEntity[];

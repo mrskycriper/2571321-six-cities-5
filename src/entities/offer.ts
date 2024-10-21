@@ -1,4 +1,4 @@
-import { UserEntity } from './user';
+import { UserEntity } from '@/entities/user';
 
 export type OfferImage = {
   id: number;
