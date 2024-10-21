@@ -1,12 +1,12 @@
 import { OfferEntity } from '@/entities/offer';
 
-type PlaceCardProps = {
+type OfferCardProps = {
   offer: OfferEntity;
   active: boolean;
 };
 
 //@ts-ignore Неиспользуемый проп active, будет задействован позже позже
-function PlaceCard({ offer, active = false }: PlaceCardProps): JSX.Element {
+function OfferCard({ offer, active = false }: OfferCardProps): JSX.Element {
   const coverImage = offer.images.filter((el) => el.isCoverImage);
   return (
     <article className="cities__card place-card">
@@ -48,4 +48,4 @@ function PlaceCard({ offer, active = false }: PlaceCardProps): JSX.Element {
   );
 }
 
-export default PlaceCard;
+export default OfferCard;
