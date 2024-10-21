@@ -1,11 +1,11 @@
-import { PlaceCardEntity } from '../../components/place-card/entities/interfaces';
 import PlaceCard from '../../components/place-card/place-card';
+import { OfferEntity } from '../../entities/offer';
 
 type MainProps = {
-  places: PlaceCardEntity[];
+  offers: OfferEntity[];
 };
 
-function Main({ places }: MainProps): JSX.Element {
+function Main({ offers }: MainProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -96,8 +96,8 @@ function Main({ places }: MainProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {places.map((place) => (
-                  <PlaceCard {...place} key={place.name} />
+                {offers.map((offer) => (
+                  <PlaceCard offer={offer} key={offer.id} />
                 ))}
               </div>
             </section>
