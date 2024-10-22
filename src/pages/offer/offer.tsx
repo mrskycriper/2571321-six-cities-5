@@ -1,4 +1,19 @@
+import { useParams } from 'react-router-dom';
+import { useMemo } from 'react';
+import { allOffers } from '@/mocks/offers';
+import { Error404 } from '@/pages/errors';
+import { CommentForm } from '@/components/comment-form';
+import { Rating } from '@/components/rating';
+
 function Offer(): JSX.Element {
+  const { id } = useParams();
+
+  const offer = useMemo(() => allOffers.find(({ id: offerId }) => offerId === id), [id]);
+
+  if (!offer) {
+    return <Error404 />;
+  }
+
   return (
     <div className="page">
       <header className="header">
@@ -90,13 +105,13 @@ function Offer(): JSX.Element {
           </div>
           <div className="offer__container container">
             <div className="offer__wrapper">
-              <div className="offer__mark">
-                <span>Premium</span>
-              </div>
+              {offer.mark ? (
+                <div className="offer__mark">
+                  <span>{offer.mark}</span>
+                </div>
+              ) : null}
               <div className="offer__name-wrapper">
-                <h1 className="offer__name">
-                  Beautiful &amp; luxurious studio at great location
-                </h1>
+                <h1 className="offer__name">{offer.name}</h1>
                 <button className="offer__bookmark-button button" type="button">
                   <svg className="offer__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
@@ -104,41 +119,35 @@ function Offer(): JSX.Element {
                   <span className="visually-hidden">To bookmarks</span>
                 </button>
               </div>
-              <div className="offer__rating rating">
-                <div className="offer__stars rating__stars">
-                  <span style={{ width: '80%' }}></span>
-                  <span className="visually-hidden">Rating</span>
-                </div>
-                <span className="offer__rating-value rating__value">4.8</span>
-              </div>
+              <Rating
+                starValue={offer.rating.starValue}
+                numericValue={offer.rating.numericValue}
+                containerClassName='offer__rating'
+                starsClassName='offer__stars'
+              />
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
-                  Apartment
+                  {offer.features.placeType}
                 </li>
-                <li className="offer__feature offer__feature--bedrooms">
-                  3 Bedrooms
-                </li>
+                {offer.features.bedroomCount ? (
+                  <li className="offer__feature offer__feature--bedrooms">
+                    {`${offer.features.bedroomCount} Bedrooms`}
+                  </li>
+                ) : null}
                 <li className="offer__feature offer__feature--adults">
-                  Max 4 adults
+                  {`Max ${offer.features.maxAdultOccupancy} adults`}
                 </li>
               </ul>
               <div className="offer__price">
-                <b className="offer__price-value">&euro;120</b>
-                <span className="offer__price-text">&nbsp;night</span>
+                <b className="offer__price-value">&euro;{offer.price.value}</b>
+                <span className="offer__price-text">&nbsp;{offer.price.period}</span>
               </div>
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
                 <ul className="offer__inside-list">
-                  <li className="offer__inside-item">Wi-Fi</li>
-                  <li className="offer__inside-item">Washing machine</li>
-                  <li className="offer__inside-item">Towels</li>
-                  <li className="offer__inside-item">Heating</li>
-                  <li className="offer__inside-item">Coffee machine</li>
-                  <li className="offer__inside-item">Baby seat</li>
-                  <li className="offer__inside-item">Kitchen</li>
-                  <li className="offer__inside-item">Dishwasher</li>
-                  <li className="offer__inside-item">Cabel TV</li>
-                  <li className="offer__inside-item">Fridge</li>
+                  {offer.insideList.map((item) => (
+                    <li className="offer__inside-item" key={item.id}>{item.text}</li>
+                  ))}
                 </ul>
               </div>
               <div className="offer__host">
@@ -147,26 +156,21 @@ function Offer(): JSX.Element {
                   <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
                     <img
                       className="offer__avatar user__avatar"
-                      src="img/avatar-angelina.jpg"
+                      src={offer.host.avatarImageSrc}
                       width="74"
                       height="74"
                       alt="Host avatar"
                     />
                   </div>
-                  <span className="offer__user-name">Angelina</span>
-                  <span className="offer__user-status">Pro</span>
+                  <span className="offer__user-name">{offer.host.name}</span>
+                  {offer.host.status ? (
+                    <span className="offer__user-status">{offer.host.status}</span>
+                  ) : null}
                 </div>
                 <div className="offer__description">
-                  <p className="offer__text">
-                    A quiet cozy and picturesque that hides behind a a river by
-                    the unique lightness of Amsterdam. The building is green and
-                    from 18th century.
-                  </p>
-                  <p className="offer__text">
-                    An independent House, strategically located between Rembrand
-                    Square and National Opera, but where the bustle of the city
-                    comes to rest in this alley flowery and colorful.
-                  </p>
+                  {offer.description.map((item) => (
+                    <p className="offer__text" key={item.id}>{item.text}</p>
+                  ))}
                 </div>
               </div>
               <section className="offer__reviews reviews">
@@ -174,149 +178,29 @@ function Offer(): JSX.Element {
                   Reviews &middot; <span className="reviews__amount">1</span>
                 </h2>
                 <ul className="reviews__list">
-                  <li className="reviews__item">
-                    <div className="reviews__user user">
-                      <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                        <img
-                          className="reviews__avatar user__avatar"
-                          src="img/avatar-max.jpg"
-                          width="54"
-                          height="54"
-                          alt="Reviews avatar"
-                        />
-                      </div>
-                      <span className="reviews__user-name">Max</span>
-                    </div>
-                    <div className="reviews__info">
-                      <div className="reviews__rating rating">
-                        <div className="reviews__stars rating__stars">
-                          <span style={{ width: '80%' }}></span>
-                          <span className="visually-hidden">Rating</span>
+                  {offer.reviews.map((reveiw) => (
+                    <li className="reviews__item" key={reveiw.id}>
+                      <div className="reviews__user user">
+                        <div className="reviews__avatar-wrapper user__avatar-wrapper">
+                          <img
+                            className="reviews__avatar user__avatar"
+                            src={reveiw.user.avatarImageSrc}
+                            width="54"
+                            height="54"
+                            alt="Reviews avatar"
+                          />
                         </div>
+                        <span className="reviews__user-name">{reveiw.user.name}</span>
                       </div>
-                      <p className="reviews__text">
-                        A quiet cozy and picturesque that hides behind a a river
-                        by the unique lightness of Amsterdam. The building is
-                        green and from 18th century.
-                      </p>
-                      <time className="reviews__time" dateTime="2019-04-24">
-                        April 2019
-                      </time>
-                    </div>
-                  </li>
+                      <div className="reviews__info">
+                        <Rating starValue={reveiw.stars} containerClassName='reviews__rating' starsClassName='reviews__stars'></Rating>
+                        <p className="reviews__text">{reveiw.text}</p>
+                        <time className="reviews__time" dateTime={reveiw.datetime}>{reveiw.readableDate}</time>
+                      </div>
+                    </li>
+                  ))}
                 </ul>
-                <form className="reviews__form form" action="#" method="post">
-                  <label className="reviews__label form__label" htmlFor="review">
-                    Your review
-                  </label>
-                  <div className="reviews__rating-form form__rating">
-                    <input
-                      className="form__rating-input visually-hidden"
-                      name="rating"
-                      value="5"
-                      id="5-stars"
-                      type="radio"
-                    />
-                    <label
-                      htmlFor="5-stars"
-                      className="reviews__rating-label form__rating-label"
-                      title="perfect"
-                    >
-                      <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
-                      </svg>
-                    </label>
-
-                    <input
-                      className="form__rating-input visually-hidden"
-                      name="rating"
-                      value="4"
-                      id="4-stars"
-                      type="radio"
-                    />
-                    <label
-                      htmlFor="4-stars"
-                      className="reviews__rating-label form__rating-label"
-                      title="good"
-                    >
-                      <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
-                      </svg>
-                    </label>
-
-                    <input
-                      className="form__rating-input visually-hidden"
-                      name="rating"
-                      value="3"
-                      id="3-stars"
-                      type="radio"
-                    />
-                    <label
-                      htmlFor="3-stars"
-                      className="reviews__rating-label form__rating-label"
-                      title="not bad"
-                    >
-                      <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
-                      </svg>
-                    </label>
-
-                    <input
-                      className="form__rating-input visually-hidden"
-                      name="rating"
-                      value="2"
-                      id="2-stars"
-                      type="radio"
-                    />
-                    <label
-                      htmlFor="2-stars"
-                      className="reviews__rating-label form__rating-label"
-                      title="badly"
-                    >
-                      <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
-                      </svg>
-                    </label>
-
-                    <input
-                      className="form__rating-input visually-hidden"
-                      name="rating"
-                      value="1"
-                      id="1-star"
-                      type="radio"
-                    />
-                    <label
-                      htmlFor="1-star"
-                      className="reviews__rating-label form__rating-label"
-                      title="terribly"
-                    >
-                      <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
-                      </svg>
-                    </label>
-                  </div>
-                  <textarea
-                    className="reviews__textarea form__textarea"
-                    id="review"
-                    name="review"
-                    placeholder="Tell how was your stay, what you like and what can be improved"
-                  />
-                  <div className="reviews__button-wrapper">
-                    <p className="reviews__help">
-                      To submit review please make sure to set{' '}
-                      <span className="reviews__star">rating</span> and describe
-                      your stay with at least{' '}
-                      <b className="reviews__text-amount">50 characters</b>.
-                    </p>
-                    <button
-                      className="reviews__submit form__submit button"
-                      type="submit"
-                      disabled
-                    >
-                      Submit
-                    </button>
-                  </div>
-                </form>
+                <CommentForm />
               </section>
             </div>
           </div>

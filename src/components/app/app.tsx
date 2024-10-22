@@ -1,26 +1,27 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { PlaceCardEntity } from '../../components/place-card/entities/interfaces';
-import Main from '../../pages/main/main';
-import Login from '../../pages/login/login';
-import Favorites from '../../pages/favorites/favorites';
-import Offer from '../../pages/offer/offer';
-import Error404 from '../../pages/error/404/404';
-import AuthChecker from '../auth-checker/auth-checker';
+import { Main } from '@/pages/main';
+import { Login } from '@/pages/login';
+import { Favorites } from '@/pages/favorites';
+import { Offer } from '@/pages/offer';
+import { Error404 } from '@/pages/errors';
+import { AuthChecker } from '@/components/auth-checker';
+import { OfferEntity } from '@/entities/offer';
 
 type AppProps = {
-  places: PlaceCardEntity[];
+  offers: OfferEntity[];
+  favoriteOffers: OfferEntity[];
 };
 
-function App({ places }: AppProps): JSX.Element {
+function App({ offers, favoriteOffers }: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Main places={places} />} />
+        <Route path="/" element={<Main offers={offers} />} />
         <Route path="/login" element={<Login />} />
         <Route
           path="/favorites"
           element={
-            <AuthChecker element={<Favorites />} isAuthorized={false}></AuthChecker>
+            <AuthChecker element={<Favorites offers={favoriteOffers}/>} isAuthorized></AuthChecker>
           }
         />
         <Route path="/offer/:id" element={<Offer />} />
