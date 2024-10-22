@@ -1,24 +1,27 @@
 import { MouseEventHandler } from 'react';
 import { OfferEntity } from '@/entities/offer';
+import { BookmarkButton } from '@/components/bookmark-button';
+import { Rating } from '@/components/rating';
 
 type OfferCardProps = {
   offer: OfferEntity;
   onMouseOver?: MouseEventHandler;
   onMouseLeave?: MouseEventHandler;
+  type: 'Main' | 'Favorites'
 };
 
-function OfferCard({ offer, onMouseOver, onMouseLeave }: OfferCardProps): JSX.Element {
+function OfferCard({ offer, onMouseOver, onMouseLeave, type }: OfferCardProps): JSX.Element {
   const coverImage = offer.images.filter((el) => el.isCoverImage);
   return (
-    <article className="cities__card place-card" onMouseOver={onMouseOver} onMouseLeave={onMouseLeave}>
+    <article className={`${type === 'Main' ? 'cities__card' : 'favorites__card'} place-card`} onMouseOver={onMouseOver} onMouseLeave={onMouseLeave}>
       {offer.mark ? (
         <div className="place-card__mark">
           <span>{offer.mark}</span>
         </div>
       ) : null}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${type === 'Main' ? 'cities__image-wrapper' : 'favorites__image-wrapper'} place-card__image-wrapper`}>
         <a href="#">
-          <img className="place-card__image" src={coverImage[0].src} width="260" height="200" alt={coverImage[0].alt}></img>
+          <img className="place-card__image" src={coverImage[0].src} width={type === 'Main' ? '260' : '150'} height={type === 'Main' ? '200' : '110'} alt={coverImage[0].alt}></img>
         </a>
       </div>
       <div className="place-card__info">
@@ -27,19 +30,13 @@ function OfferCard({ offer, onMouseOver, onMouseLeave }: OfferCardProps): JSX.El
             <b className="place-card__price-value">&euro;{offer.price.value}</b>
             <span className="place-card__price-text">&#47;&nbsp;{offer.price.period}</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <BookmarkButton marked={type === 'Main' ? false : true} />
         </div>
-        <div className="place-card__rating rating">
-          <div className="place-card__stars rating__stars">
-            <span style={{ width: `${20 * offer.rating.starValue}%` }}></span>
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <Rating
+          starValue={offer.rating.starValue}
+          containerClassName={'place-card__rating'}
+          starsClassName={'place-card__stars'}
+        />
         <h2 className="place-card__name">
           <a href="#">{offer.name}</a>
         </h2>
