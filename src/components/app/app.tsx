@@ -9,9 +9,10 @@ import { OfferEntity } from '@/entities/offer';
 
 type AppProps = {
   offers: OfferEntity[];
+  favoriteOffers: OfferEntity[];
 };
 
-function App({ offers }: AppProps): JSX.Element {
+function App({ offers, favoriteOffers }: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -20,7 +21,7 @@ function App({ offers }: AppProps): JSX.Element {
         <Route
           path="/favorites"
           element={
-            <AuthChecker element={<Favorites />} isAuthorized={true}></AuthChecker>
+            <AuthChecker element={<Favorites offers={favoriteOffers}/>} isAuthorized={true}></AuthChecker>
           }
         />
         <Route path="/offer/:id" element={<Offer />} />

@@ -42,7 +42,9 @@ function OffersListMain({ offers, city }: OffersListMainProps): JSX.Element {
                 }}
                 onMouseLeave={() => {
                   setActiveOfferId(null);
-                }} />
+                }}
+                type={'Main'}
+              />
             ))}
           </div>
         </section>
