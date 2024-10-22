@@ -1,1 +1,1 @@
-export type { UserStatus, UserEntity } from "./user"
+export type { UserStatus, UserEntity } from './user';

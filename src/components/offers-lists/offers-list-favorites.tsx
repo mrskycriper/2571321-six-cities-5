@@ -27,7 +27,7 @@ function OffersListFavorites({ offers }: OffersListFavoritesProps): JSX.Element 
         <section className="favorites">
           <h1 className="favorites__title">Saved listing</h1>
           <ul className="favorites__list">
-            {Object.entries(cityOffersMap).map(([city, offers]) => (
+            {Object.entries(cityOffersMap).map(([city, mappedOffers]) => (
               <li className="favorites__locations-items" key={city}>
                 <div className='favorites__locations locations locations--current'>
                   <div className="locations__item">
@@ -37,7 +37,7 @@ function OffersListFavorites({ offers }: OffersListFavoritesProps): JSX.Element 
                   </div>
                 </div>
                 <div className="favorites__places">
-                  {offers.map((offer) => (
+                  {mappedOffers.map((offer) => (
                     <OfferCard offer={offer} key={offer.id} type={'Favorites'} />
                   ))}
                 </div>

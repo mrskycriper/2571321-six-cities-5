@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 function CommentForm(): JSX.Element {
   const [rating, setRating] = useState(0);
@@ -10,7 +10,7 @@ function CommentForm(): JSX.Element {
       setSubmitDisabled(true);
     } else {
       setSubmitDisabled(false);
-    };
+    }
   }, [rating, text]);
 
   const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -75,6 +75,6 @@ function CommentForm(): JSX.Element {
       </div>
     </form>
   );
-};
+}
 
 export default CommentForm;

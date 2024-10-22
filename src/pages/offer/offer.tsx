@@ -7,9 +7,7 @@ import { CommentForm } from '@/components/comment-form';
 function Offer(): JSX.Element {
   const { id } = useParams();
 
-  const offer = useMemo(() => {
-    return allOffers.find(({ id: offerId }) => offerId === id);
-  }, [id]);
+  const offer = useMemo(() => allOffers.find(({ id: offerId }) => offerId === id), [id]);
 
   if (!offer) {
     return <Error404 />;
@@ -181,7 +179,7 @@ function Offer(): JSX.Element {
                 </h2>
                 <ul className="reviews__list">
                   {offer.reviews.map((reveiw) => (
-                    <li className="reviews__item">
+                    <li className="reviews__item" key={reveiw.id}>
                       <div className="reviews__user user">
                         <div className="reviews__avatar-wrapper user__avatar-wrapper">
                           <img

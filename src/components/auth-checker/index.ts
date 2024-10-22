@@ -1,1 +1,1 @@
-export { default as AuthChecker } from "./auth-checker"
+export { default as AuthChecker } from './auth-checker';

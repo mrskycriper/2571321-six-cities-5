@@ -8,7 +8,7 @@ type OffersListMainProps = {
 };
 
 function OffersListMain({ offers, city }: OffersListMainProps): JSX.Element {
-  const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
+  const [, setActiveOfferId] = useState<string | null>(null);
 
   return (
     <div className="cities">

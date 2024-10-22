@@ -5,7 +5,7 @@ type RatingProps = {
   starValue: number;
   containerClassName: string;
   starsClassName: string;
-  valueClassName?: string
+  valueClassName?: string;
 };
 
 function Rating({
@@ -26,6 +26,6 @@ function Rating({
       ) : null}
     </div>
   );
-};
+}
 
 export default Rating;

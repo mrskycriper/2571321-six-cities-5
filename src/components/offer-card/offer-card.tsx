@@ -8,7 +8,7 @@ type OfferCardProps = {
   offer: OfferEntity;
   onMouseOver?: MouseEventHandler;
   onMouseLeave?: MouseEventHandler;
-  type: 'Main' | 'Favorites'
+  type: 'Main' | 'Favorites';
 };
 
 function OfferCard({ offer, onMouseOver, onMouseLeave, type }: OfferCardProps): JSX.Element {
@@ -31,7 +31,7 @@ function OfferCard({ offer, onMouseOver, onMouseLeave, type }: OfferCardProps): 
             <b className="place-card__price-value">&euro;{offer.price.value}</b>
             <span className="place-card__price-text">&#47;&nbsp;{offer.price.period}</span>
           </div>
-          <BookmarkButton marked={type === 'Main' ? false : true} />
+          <BookmarkButton marked={type !== 'Main'} />
         </div>
         <Rating
           starValue={offer.rating.starValue}
@@ -39,7 +39,7 @@ function OfferCard({ offer, onMouseOver, onMouseLeave, type }: OfferCardProps): 
           starsClassName={'place-card__stars'}
         />
         <h2 className="place-card__name">
-        <Link to={`/offer/${offer.id}`}>{offer.name}</Link>
+          <Link to={`/offer/${offer.id}`}>{offer.name}</Link>
         </h2>
         <p className="place-card__type">{offer.features.placeType}</p>
       </div>

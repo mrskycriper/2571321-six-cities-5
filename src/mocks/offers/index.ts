@@ -1,2 +1,2 @@
-export { allOffers } from "./all-offers"
-export { favoriteOffers } from "./favorite-offers"
+export { allOffers } from './all-offers';
+export { favoriteOffers } from './favorite-offers';
