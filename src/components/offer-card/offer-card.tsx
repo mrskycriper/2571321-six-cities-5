@@ -1,4 +1,5 @@
 import { MouseEventHandler } from 'react';
+import { Link } from 'react-router-dom';
 import { OfferEntity } from '@/entities/offer';
 import { BookmarkButton } from '@/components/bookmark-button';
 import { Rating } from '@/components/rating';
@@ -20,9 +21,9 @@ function OfferCard({ offer, onMouseOver, onMouseLeave, type }: OfferCardProps): 
         </div>
       ) : null}
       <div className={`${type === 'Main' ? 'cities__image-wrapper' : 'favorites__image-wrapper'} place-card__image-wrapper`}>
-        <a href="#">
+        <Link to={`/offer/${offer.id}`}>
           <img className="place-card__image" src={coverImage[0].src} width={type === 'Main' ? '260' : '150'} height={type === 'Main' ? '200' : '110'} alt={coverImage[0].alt}></img>
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -38,7 +39,7 @@ function OfferCard({ offer, onMouseOver, onMouseLeave, type }: OfferCardProps): 
           starsClassName={'place-card__stars'}
         />
         <h2 className="place-card__name">
-          <a href="#">{offer.name}</a>
+        <Link to={`/offer/${offer.id}`}>{offer.name}</Link>
         </h2>
         <p className="place-card__type">{offer.features.placeType}</p>
       </div>
