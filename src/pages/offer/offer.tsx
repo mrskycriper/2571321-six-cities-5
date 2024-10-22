@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { allOffers } from '@/mocks/offers';
 import { Error404 } from '@/pages/errors';
 import { CommentForm } from '@/components/comment-form';
+import { Rating } from '@/components/rating';
 
 function Offer(): JSX.Element {
   const { id } = useParams();
@@ -118,13 +119,12 @@ function Offer(): JSX.Element {
                   <span className="visually-hidden">To bookmarks</span>
                 </button>
               </div>
-              <div className="offer__rating rating">
-                <div className="offer__stars rating__stars">
-                  <span style={{ width: `${20 * offer.rating.starValue}%` }}></span>
-                  <span className="visually-hidden">Rating</span>
-                </div>
-                <span className="offer__rating-value rating__value">{offer.rating.numericValue}</span>
-              </div>
+              <Rating
+                starValue={offer.rating.starValue}
+                numericValue={offer.rating.numericValue}
+                containerClassName='offer__rating'
+                starsClassName='offer__stars'
+              />
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
                   {offer.features.placeType}
@@ -193,12 +193,7 @@ function Offer(): JSX.Element {
                         <span className="reviews__user-name">{reveiw.user.name}</span>
                       </div>
                       <div className="reviews__info">
-                        <div className="reviews__rating rating">
-                          <div className="reviews__stars rating__stars">
-                            <span style={{ width: `${20 * offer.rating.starValue}%` }}></span>
-                            <span className="visually-hidden">Rating</span>
-                          </div>
-                        </div>
+                        <Rating starValue={reveiw.stars} containerClassName='reviews__rating' starsClassName='reviews__stars'></Rating>
                         <p className="reviews__text">{reveiw.text}</p>
                         <time className="reviews__time" dateTime={reveiw.datetime}>{reveiw.readableDate}</time>
                       </div>
