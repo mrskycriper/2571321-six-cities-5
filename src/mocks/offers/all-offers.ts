@@ -123,7 +123,9 @@ export const allOffers: OfferEntity[] = [
         datetime: '2019-04-24',
         readableDate: 'April 2019'
       }
-    ]
+    ],
+    latitude: 52.3909553943508,
+    longitude: 4.85309666406198
   },
   {
     id: '1f0686d9-84d4-4131-a21a-631a3905f15b',
@@ -220,7 +222,9 @@ export const allOffers: OfferEntity[] = [
         datetime: '2019-04-24',
         readableDate: 'April 2019'
       }
-    ]
+    ],
+    latitude: 52.3609553943508,
+    longitude: 4.85309666406198
   },
   {
     id: 'd0486eff-de68-4eeb-bdc4-d8070123a6e0',
@@ -342,7 +346,9 @@ export const allOffers: OfferEntity[] = [
         datetime: '2019-04-24',
         readableDate: 'April 2019'
       }
-    ]
+    ],
+    latitude: 52.3909553943508,
+    longitude: 4.929309666406198
   },
   {
     id: '07a16137-7d2a-4e94-bb41-673bea130172',
@@ -464,7 +470,9 @@ export const allOffers: OfferEntity[] = [
         datetime: '2019-04-24',
         readableDate: 'April 2019'
       }
-    ]
+    ],
+    latitude: 52.3809553943508,
+    longitude: 4.939309666406198
   },
   {
     id: '969c5497-5632-4c2f-a838-2d89d2f8b660',
@@ -561,6 +569,8 @@ export const allOffers: OfferEntity[] = [
         datetime: '2019-04-24',
         readableDate: 'April 2019'
       }
-    ]
+    ],
+    latitude: 50.936389,
+    longitude: 6.952778
   }
 ];

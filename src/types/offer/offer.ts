@@ -58,4 +58,6 @@ export type OfferEntity = {
   host: UserEntity;
   description: OfferDescriptionItem[];
   reviews: OfferReview[];
+  latitude: number;
+  longitude: number;
 };
