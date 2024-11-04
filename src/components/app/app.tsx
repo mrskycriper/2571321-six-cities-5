@@ -5,7 +5,7 @@ import { Favorites } from '@/pages/favorites';
 import { Offer } from '@/pages/offer';
 import { Error404 } from '@/pages/errors';
 import { AuthChecker } from '@/components/auth-checker';
-import { OfferEntity } from '@/entities/offer';
+import { OfferEntity } from '@/types/offer';
 
 type AppProps = {
   offers: OfferEntity[];

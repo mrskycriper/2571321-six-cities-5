@@ -1,6 +1,6 @@
 import { MouseEventHandler } from 'react';
 import { Link } from 'react-router-dom';
-import { OfferEntity } from '@/entities/offer';
+import { OfferEntity } from '@/types/offer';
 import { BookmarkButton } from '@/components/bookmark-button';
 import { Rating } from '@/components/rating';
 
