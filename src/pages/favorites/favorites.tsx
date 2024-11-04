@@ -1,4 +1,5 @@
 import Header from '@/components/header/header';
+import Footer from '@/components/footer/footer';
 import { OffersListFavorites } from '@/components/offers-lists/offers-lists';
 import { OfferEntity } from '@/types/offer/offer';
 
@@ -11,17 +12,7 @@ function Favorites({ offers }: FavoritesProps): JSX.Element {
     <div className="page">
       <Header isLoggedIn/>
       <OffersListFavorites offers={offers}/>
-      <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
-          <img
-            className="footer__logo"
-            src="img/logo.svg"
-            alt="6 cities logo"
-            width="64"
-            height="33"
-          />
-        </a>
-      </footer>
+      <Footer />
     </div>
   );
 }
