@@ -1,9 +1,11 @@
+import { useEffect, useState } from 'react';
+import Header from '@/components/header/header';
+import Map from '@/components/map/map';
 import { OffersListMain } from '@/components/offers-lists/offers-lists';
 import { City } from '@/types/city/city';
 import { OfferEntity } from '@/types/offer/offer';
+import { Points } from '@/types/point/point';
 import { cities } from '@/mocks/cities/cities';
-import { useEffect, useState } from 'react';
-import Header from '@/components/header/header';
 
 type MainProps = {
   offers: OfferEntity[];
@@ -29,6 +31,26 @@ function Main({ offers }: MainProps): JSX.Element {
   useEffect(() => {
     setActiveOffers(getActiveOffers(offers, activeCity));
   }, [offers, activeCity]);
+
+  const getOffersPoints = (allOffers: OfferEntity[]): Points => {
+    const points: Points = [];
+    allOffers.map((offer) =>
+      points.push({
+        title: offer.name,
+        lat: offer.latitude,
+        lng: offer.longitude,
+      })
+    );
+    return points;
+  };
+
+  const [offersPoints, setOffersPoints] = useState(getOffersPoints(offers));
+
+  useEffect(() => {
+    setOffersPoints(getOffersPoints(activeOffers));
+  }, [activeOffers]);
+
+  const [activePoint] = useState(undefined);
 
   return (
     <div className="page page--gray page--main">
@@ -87,7 +109,11 @@ function Main({ offers }: MainProps): JSX.Element {
               <OffersListMain offers={activeOffers} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map
+                city={activeCity}
+                points={offersPoints}
+                selectedPoint={activePoint}
+              />
             </div>
           </div>
         </div>
