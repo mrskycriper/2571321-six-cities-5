@@ -1,4 +1,5 @@
-import { UserEntity } from '@/entities/user';
+import { UserEntity } from '@/types/user/user';
+import { City } from '@/types/city/city';
 
 export type OfferImage = {
   id: number;
@@ -46,7 +47,7 @@ export type OfferReview = {
 
 export type OfferEntity = {
   id: string;
-  city: string;
+  city: City;
   images: OfferImage[];
   mark?: OfferMark;
   name: string;
@@ -57,4 +58,6 @@ export type OfferEntity = {
   host: UserEntity;
   description: OfferDescriptionItem[];
   reviews: OfferReview[];
+  latitude: number;
+  longitude: number;
 };

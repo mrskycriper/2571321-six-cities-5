@@ -1,9 +1,10 @@
-import { OfferEntity } from '@/entities/offer/offer';
+import { OfferEntity } from '@/types/offer/offer';
+import { cities } from '@/mocks/cities/cities';
 
 export const allOffers: OfferEntity[] = [
   {
     id: 'bd040d67-8030-48a8-b47b-0b4f5b30ccd5',
-    city: 'Amsterdam',
+    city: cities['Amsterdam'],
     images: [
       {
         id: 1,
@@ -122,11 +123,13 @@ export const allOffers: OfferEntity[] = [
         datetime: '2019-04-24',
         readableDate: 'April 2019'
       }
-    ]
+    ],
+    latitude: 52.3909553943508,
+    longitude: 4.85309666406198
   },
   {
     id: '1f0686d9-84d4-4131-a21a-631a3905f15b',
-    city: 'Amsterdam',
+    city: cities['Amsterdam'],
     images: [
       {
         id: 1,
@@ -219,11 +222,13 @@ export const allOffers: OfferEntity[] = [
         datetime: '2019-04-24',
         readableDate: 'April 2019'
       }
-    ]
+    ],
+    latitude: 52.3609553943508,
+    longitude: 4.85309666406198
   },
   {
     id: 'd0486eff-de68-4eeb-bdc4-d8070123a6e0',
-    city: 'Amsterdam',
+    city: cities['Amsterdam'],
     images: [
       {
         id: 1,
@@ -341,11 +346,13 @@ export const allOffers: OfferEntity[] = [
         datetime: '2019-04-24',
         readableDate: 'April 2019'
       }
-    ]
+    ],
+    latitude: 52.3909553943508,
+    longitude: 4.929309666406198
   },
   {
     id: '07a16137-7d2a-4e94-bb41-673bea130172',
-    city: 'Amsterdam',
+    city: cities['Amsterdam'],
     images: [
       {
         id: 1,
@@ -463,11 +470,13 @@ export const allOffers: OfferEntity[] = [
         datetime: '2019-04-24',
         readableDate: 'April 2019'
       }
-    ]
+    ],
+    latitude: 52.3809553943508,
+    longitude: 4.939309666406198
   },
   {
     id: '969c5497-5632-4c2f-a838-2d89d2f8b660',
-    city: 'Cologne',
+    city: cities['Cologne'],
     images: [
       {
         id: 1,
@@ -560,6 +569,8 @@ export const allOffers: OfferEntity[] = [
         datetime: '2019-04-24',
         readableDate: 'April 2019'
       }
-    ]
+    ],
+    latitude: 50.936389,
+    longitude: 6.952778
   }
 ];

@@ -22,7 +22,9 @@ function Rating({
         <span className="visually-hidden">Rating</span>
       </div>
       {numericValue !== undefined ? (
-        <span className={classNames(valueClassName, 'rating__value')}>{numericValue}</span>
+        <span className={classNames(valueClassName, 'rating__value')}>
+          {numericValue}
+        </span>
       ) : null}
     </div>
   );
