@@ -1,9 +1,10 @@
 import { OfferEntity } from '@/types/offer/offer';
+import { cities } from '@/mocks/cities/cities';
 
 export const favoriteOffers: OfferEntity[] = [
   {
     id: '07a16137-7d2a-4e94-bb41-673bea130172',
-    city: 'Amsterdam',
+    city: cities['Amsterdam'],
     images: [
       {
         id: 1,
@@ -125,7 +126,7 @@ export const favoriteOffers: OfferEntity[] = [
   },
   {
     id: '1f0686d9-84d4-4131-a21a-631a3905f15b',
-    city: 'Amsterdam',
+    city: cities['Amsterdam'],
     images: [
       {
         id: 1,
@@ -222,7 +223,7 @@ export const favoriteOffers: OfferEntity[] = [
   },
   {
     id: '969c5497-5632-4c2f-a838-2d89d2f8b660',
-    city: 'Cologne',
+    city: cities['Cologne'],
     images: [
       {
         id: 1,
