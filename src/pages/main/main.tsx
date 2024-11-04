@@ -1,5 +1,5 @@
-import { OffersListMain } from '@/components/offers-lists';
-import { OfferEntity } from '@/types/offer';
+import { OffersListMain } from '@/components/offers-lists/offers-lists';
+import { OfferEntity } from '@/types/offer/offer';
 
 type MainProps = {
   offers: OfferEntity[];

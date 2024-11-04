@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { OfferEntity } from '@/types/offer';
-import { OfferCard } from '@/components/offer-card';
+import { OfferEntity } from '@/types/offer/offer';
+import OfferCard from '@/components/offer-card/offer-card';
 
 type OffersListMainProps = {
   offers: OfferEntity[];

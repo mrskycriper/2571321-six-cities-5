@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { useMemo } from 'react';
-import { allOffers } from '@/mocks/offers';
-import { Error404 } from '@/pages/errors';
-import { CommentForm } from '@/components/comment-form';
-import { Rating } from '@/components/rating';
+import { allOffers } from '@/mocks/offers/offers';
+import { Error404 } from '@/pages/errors/errors';
+import CommentForm from '@/components/comment-form/comment-form';
+import Rating from '@/components/rating/rating';
 
 function Offer(): JSX.Element {
   const { id } = useParams();

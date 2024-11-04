@@ -1,8 +1,8 @@
 import { MouseEventHandler } from 'react';
 import { Link } from 'react-router-dom';
-import { OfferEntity } from '@/types/offer';
-import { BookmarkButton } from '@/components/bookmark-button';
-import { Rating } from '@/components/rating';
+import { OfferEntity } from '@/types/offer/offer';
+import BookmarkButton from '@/components/bookmark-button/bookmark-button';
+import Rating from '@/components/rating/rating';
 
 type OfferCardProps = {
   offer: OfferEntity;

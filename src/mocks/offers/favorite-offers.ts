@@ -1,4 +1,4 @@
-import { OfferEntity } from '@/types/offer';
+import { OfferEntity } from '@/types/offer/offer';
 
 export const favoriteOffers: OfferEntity[] = [
   {
