@@ -9,7 +9,10 @@ import Header from '@/components/header/header';
 function Offer(): JSX.Element {
   const { id } = useParams();
 
-  const offer = useMemo(() => allOffers.find(({ id: offerId }) => offerId === id), [id]);
+  const offer = useMemo(
+    () => allOffers.find(({ id: offerId }) => offerId === id),
+    [id]
+  );
 
   if (!offer) {
     return <Error404 />;
@@ -17,54 +20,21 @@ function Offer(): JSX.Element {
 
   return (
     <div className="page">
-      <Header isLoggedIn/>
+      <Header isLoggedIn />
 
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/room.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/apartment-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/apartment-02.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/apartment-03.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/studio-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/apartment-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
+              {offer.images.map((image) => (
+                <div className="offer__image-wrapper" key={image.id}>
+                  <img
+                    className="offer__image"
+                    src={image.src}
+                    alt={image.alt}
+                  />
+                </div>
+              ))}
             </div>
           </div>
           <div className="offer__container container">
@@ -86,8 +56,8 @@ function Offer(): JSX.Element {
               <Rating
                 starValue={offer.rating.starValue}
                 numericValue={offer.rating.numericValue}
-                containerClassName='offer__rating'
-                starsClassName='offer__stars'
+                containerClassName="offer__rating"
+                starsClassName="offer__stars"
               />
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
@@ -104,13 +74,17 @@ function Offer(): JSX.Element {
               </ul>
               <div className="offer__price">
                 <b className="offer__price-value">&euro;{offer.price.value}</b>
-                <span className="offer__price-text">&nbsp;{offer.price.period}</span>
+                <span className="offer__price-text">
+                  &nbsp;{offer.price.period}
+                </span>
               </div>
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
                 <ul className="offer__inside-list">
                   {offer.insideList.map((item) => (
-                    <li className="offer__inside-item" key={item.id}>{item.text}</li>
+                    <li className="offer__inside-item" key={item.id}>
+                      {item.text}
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -128,12 +102,16 @@ function Offer(): JSX.Element {
                   </div>
                   <span className="offer__user-name">{offer.host.name}</span>
                   {offer.host.status ? (
-                    <span className="offer__user-status">{offer.host.status}</span>
+                    <span className="offer__user-status">
+                      {offer.host.status}
+                    </span>
                   ) : null}
                 </div>
                 <div className="offer__description">
                   {offer.description.map((item) => (
-                    <p className="offer__text" key={item.id}>{item.text}</p>
+                    <p className="offer__text" key={item.id}>
+                      {item.text}
+                    </p>
                   ))}
                 </div>
               </div>
@@ -154,12 +132,23 @@ function Offer(): JSX.Element {
                             alt="Reviews avatar"
                           />
                         </div>
-                        <span className="reviews__user-name">{reveiw.user.name}</span>
+                        <span className="reviews__user-name">
+                          {reveiw.user.name}
+                        </span>
                       </div>
                       <div className="reviews__info">
-                        <Rating starValue={reveiw.stars} containerClassName='reviews__rating' starsClassName='reviews__stars'></Rating>
+                        <Rating
+                          starValue={reveiw.stars}
+                          containerClassName="reviews__rating"
+                          starsClassName="reviews__stars"
+                        />
                         <p className="reviews__text">{reveiw.text}</p>
-                        <time className="reviews__time" dateTime={reveiw.datetime}>{reveiw.readableDate}</time>
+                        <time
+                          className="reviews__time"
+                          dateTime={reveiw.datetime}
+                        >
+                          {reveiw.readableDate}
+                        </time>
                       </div>
                     </li>
                   ))}
