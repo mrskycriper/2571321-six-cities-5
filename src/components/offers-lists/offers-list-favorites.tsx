@@ -7,7 +7,9 @@ type OffersListFavoritesProps = {
   offers: OfferEntity[];
 };
 
-function OffersListFavorites({ offers }: OffersListFavoritesProps): JSX.Element {
+function OffersListFavorites({
+  offers,
+}: OffersListFavoritesProps): JSX.Element {
   const cityOffersMap = useMemo(() => {
     const map: Partial<Record<CityName, OfferEntity[]>> = {};
 
@@ -30,7 +32,7 @@ function OffersListFavorites({ offers }: OffersListFavoritesProps): JSX.Element 
           <ul className="favorites__list">
             {Object.entries(cityOffersMap).map(([city, mappedOffers]) => (
               <li className="favorites__locations-items" key={city}>
-                <div className='favorites__locations locations locations--current'>
+                <div className="favorites__locations locations locations--current">
                   <div className="locations__item">
                     <a className="locations__item-link" href="#">
                       <span>{city}</span>
@@ -39,7 +41,11 @@ function OffersListFavorites({ offers }: OffersListFavoritesProps): JSX.Element 
                 </div>
                 <div className="favorites__places">
                   {mappedOffers.map((offer) => (
-                    <OfferCard offer={offer} key={offer.id} type={'Favorites'} />
+                    <OfferCard
+                      offer={offer}
+                      key={offer.id}
+                      type={'Favorites'}
+                    />
                   ))}
                 </div>
               </li>

@@ -54,7 +54,7 @@ function Map(props: MapProps): JSX.Element {
   }, [map, points, selectedPoint]);
 
   return (
-    <section className="cities__map map" style={{background: 'none'}}>
+    <section className="cities__map map" style={{ background: 'none' }}>
       <div style={{ height: '500px' }} ref={mapRef}></div>
     </section>
   );

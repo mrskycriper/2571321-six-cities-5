@@ -21,7 +21,10 @@ function App({ offers, favoriteOffers }: AppProps): JSX.Element {
         <Route
           path="/favorites"
           element={
-            <AuthChecker element={<Favorites offers={favoriteOffers}/>} isAuthorized></AuthChecker>
+            <AuthChecker
+              element={<Favorites offers={favoriteOffers} />}
+              isAuthorized
+            />
           }
         />
         <Route path="/offer/:id" element={<Offer />} />

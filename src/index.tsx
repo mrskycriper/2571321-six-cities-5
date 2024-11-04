@@ -9,6 +9,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App offers={allOffers} favoriteOffers={favoriteOffers}/>
+    <App offers={allOffers} favoriteOffers={favoriteOffers} />
   </React.StrictMode>
 );

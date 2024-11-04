@@ -10,8 +10,8 @@ type FavoritesProps = {
 function Favorites({ offers }: FavoritesProps): JSX.Element {
   return (
     <div className="page">
-      <Header isLoggedIn/>
-      <OffersListFavorites offers={offers}/>
+      <Header isLoggedIn />
+      <OffersListFavorites offers={offers} />
       <Footer />
     </div>
   );
