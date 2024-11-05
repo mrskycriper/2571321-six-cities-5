@@ -1,5 +1,6 @@
 import { UserEntity } from '@/types/user/user';
 import { City } from '@/types/city/city';
+import { ReviewItem } from '@/types/review/review';
 
 export type OfferImage = {
   id: number;
@@ -36,15 +37,6 @@ export type OfferDescriptionItem = {
   text: string;
 };
 
-export type OfferReview = {
-  id: string;
-  user: UserEntity;
-  stars: 1 | 2 | 3 | 4 | 5;
-  text: string;
-  datetime: string;
-  readableDate: string;
-};
-
 export type OfferEntity = {
   id: string;
   city: City;
@@ -57,7 +49,7 @@ export type OfferEntity = {
   insideList: OfferInsideItem[];
   host: UserEntity;
   description: OfferDescriptionItem[];
-  reviews: OfferReview[];
+  reviews: ReviewItem[];
   latitude: number;
   longitude: number;
 };
