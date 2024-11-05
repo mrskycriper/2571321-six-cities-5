@@ -3,13 +3,13 @@ import { OfferEntity } from '@/types/offer/offer';
 import OfferCard from '@/components/offer-card/offer-card';
 import { CityName } from '@/types/city/city';
 
-type OffersListFavoritesProps = {
+type FavoritesListProps = {
   offers: OfferEntity[];
 };
 
-function OffersListFavorites({
+function FavoritesList({
   offers,
-}: OffersListFavoritesProps): JSX.Element {
+}: FavoritesListProps): JSX.Element {
   const cityOffersMap = useMemo(() => {
     const map: Partial<Record<CityName, OfferEntity[]>> = {};
 
@@ -57,4 +57,4 @@ function OffersListFavorites({
   );
 }
 
-export default OffersListFavorites;
+export default FavoritesList;
