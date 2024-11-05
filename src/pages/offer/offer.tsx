@@ -6,18 +6,32 @@ import CommentForm from '@/components/comment-form/comment-form';
 import Rating from '@/components/rating/rating';
 import Header from '@/components/header/header';
 import ReviewsList from '@/components/reveiws-list/reveiws-list';
+import Map from '@/components/map/map';
+import { OfferEntity } from '@/types/offer/offer';
+import offersToPoints from '@/utils/offers-to-points/offers-to-points';
+import { Points } from '@/types/point/point';
+import { City } from '@/types/city/city';
 
 function Offer(): JSX.Element {
   const { id } = useParams();
 
-  const offer = useMemo(
+  const currentOffer = useMemo(
     () => allOffers.find(({ id: offerId }) => offerId === id),
     [id]
   );
 
-  if (!offer) {
+  if (!currentOffer) {
     return <Error404 />;
   }
+
+  const currentCity: City = currentOffer.city;
+
+  const nearbyOffers: OfferEntity[] = allOffers.filter(
+    (offer: OfferEntity) =>
+      offer.id !== currentOffer.id && offer.city === currentCity
+  );
+
+  const nearbyPoints: Points = offersToPoints(nearbyOffers);
 
   return (
     <div className="page">
@@ -26,7 +40,7 @@ function Offer(): JSX.Element {
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              {offer.images.map((image) => (
+              {currentOffer.images.map((image) => (
                 <div className="offer__image-wrapper" key={image.id}>
                   <img
                     className="offer__image"
@@ -39,13 +53,13 @@ function Offer(): JSX.Element {
           </div>
           <div className="offer__container container">
             <div className="offer__wrapper">
-              {offer.mark ? (
+              {currentOffer.mark ? (
                 <div className="offer__mark">
-                  <span>{offer.mark}</span>
+                  <span>{currentOffer.mark}</span>
                 </div>
               ) : null}
               <div className="offer__name-wrapper">
-                <h1 className="offer__name">{offer.name}</h1>
+                <h1 className="offer__name">{currentOffer.name}</h1>
                 <button className="offer__bookmark-button button" type="button">
                   <svg className="offer__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
@@ -54,34 +68,36 @@ function Offer(): JSX.Element {
                 </button>
               </div>
               <Rating
-                starValue={offer.rating.starValue}
-                numericValue={offer.rating.numericValue}
+                starValue={currentOffer.rating.starValue}
+                numericValue={currentOffer.rating.numericValue}
                 containerClassName="offer__rating"
                 starsClassName="offer__stars"
               />
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
-                  {offer.features.placeType}
+                  {currentOffer.features.placeType}
                 </li>
-                {offer.features.bedroomCount ? (
+                {currentOffer.features.bedroomCount ? (
                   <li className="offer__feature offer__feature--bedrooms">
-                    {`${offer.features.bedroomCount} Bedrooms`}
+                    {`${currentOffer.features.bedroomCount} Bedrooms`}
                   </li>
                 ) : null}
                 <li className="offer__feature offer__feature--adults">
-                  {`Max ${offer.features.maxAdultOccupancy} adults`}
+                  {`Max ${currentOffer.features.maxAdultOccupancy} adults`}
                 </li>
               </ul>
               <div className="offer__price">
-                <b className="offer__price-value">&euro;{offer.price.value}</b>
+                <b className="offer__price-value">
+                  &euro;{currentOffer.price.value}
+                </b>
                 <span className="offer__price-text">
-                  &nbsp;{offer.price.period}
+                  &nbsp;{currentOffer.price.period}
                 </span>
               </div>
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
                 <ul className="offer__inside-list">
-                  {offer.insideList.map((item) => (
+                  {currentOffer.insideList.map((item) => (
                     <li className="offer__inside-item" key={item.id}>
                       {item.text}
                     </li>
@@ -94,21 +110,23 @@ function Offer(): JSX.Element {
                   <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
                     <img
                       className="offer__avatar user__avatar"
-                      src={offer.host.avatarImageSrc}
+                      src={currentOffer.host.avatarImageSrc}
                       width="74"
                       height="74"
                       alt="Host avatar"
                     />
                   </div>
-                  <span className="offer__user-name">{offer.host.name}</span>
-                  {offer.host.status ? (
+                  <span className="offer__user-name">
+                    {currentOffer.host.name}
+                  </span>
+                  {currentOffer.host.status ? (
                     <span className="offer__user-status">
-                      {offer.host.status}
+                      {currentOffer.host.status}
                     </span>
                   ) : null}
                 </div>
                 <div className="offer__description">
-                  {offer.description.map((item) => (
+                  {currentOffer.description.map((item) => (
                     <p className="offer__text" key={item.id}>
                       {item.text}
                     </p>
@@ -119,15 +137,19 @@ function Offer(): JSX.Element {
                 <h2 className="reviews__title">
                   Reviews &middot;{' '}
                   <span className="reviews__amount">
-                    {offer.reviews.length}
+                    {currentOffer.reviews.length}
                   </span>
                 </h2>
-                <ReviewsList reviews={offer.reviews} />
+                <ReviewsList reviews={currentOffer.reviews} />
                 <CommentForm />
               </section>
             </div>
           </div>
-          <section className="offer__map map"></section>
+          <Map
+            city={currentCity}
+            points={nearbyPoints}
+            selectedPoint={undefined}
+          />
         </section>
         <div className="container">
           <section className="near-places places">
