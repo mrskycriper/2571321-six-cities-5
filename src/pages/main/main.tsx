@@ -4,8 +4,8 @@ import Map from '@/components/map/map';
 import { OffersListMain } from '@/components/offers-lists/offers-lists';
 import { City } from '@/types/city/city';
 import { OfferEntity } from '@/types/offer/offer';
-import { Points } from '@/types/point/point';
 import { cities } from '@/mocks/cities/cities';
+import offersToPoints from '@/utils/offers-to-points/offers-to-points';
 
 type MainProps = {
   offers: OfferEntity[];
@@ -32,22 +32,10 @@ function Main({ offers }: MainProps): JSX.Element {
     setActiveOffers(getActiveOffers(offers, activeCity));
   }, [offers, activeCity]);
 
-  const getOffersPoints = (allOffers: OfferEntity[]): Points => {
-    const points: Points = [];
-    allOffers.map((offer) =>
-      points.push({
-        title: offer.name,
-        lat: offer.latitude,
-        lng: offer.longitude,
-      })
-    );
-    return points;
-  };
-
-  const [offersPoints, setOffersPoints] = useState(getOffersPoints(offers));
+  const [offersPoints, setOffersPoints] = useState(offersToPoints(offers));
 
   useEffect(() => {
-    setOffersPoints(getOffersPoints(activeOffers));
+    setOffersPoints(offersToPoints(activeOffers));
   }, [activeOffers]);
 
   const [activePoint] = useState(undefined);
