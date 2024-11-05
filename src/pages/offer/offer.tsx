@@ -5,6 +5,7 @@ import { Error404 } from '@/pages/errors/errors';
 import CommentForm from '@/components/comment-form/comment-form';
 import Rating from '@/components/rating/rating';
 import Header from '@/components/header/header';
+import ReviewsList from '@/components/reveiws-list/reveiws-list';
 
 function Offer(): JSX.Element {
   const { id } = useParams();
@@ -21,7 +22,6 @@ function Offer(): JSX.Element {
   return (
     <div className="page">
       <Header isLoggedIn />
-
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">
@@ -117,42 +117,12 @@ function Offer(): JSX.Element {
               </div>
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">
-                  Reviews &middot; <span className="reviews__amount">1</span>
+                  Reviews &middot;{' '}
+                  <span className="reviews__amount">
+                    {offer.reviews.length}
+                  </span>
                 </h2>
-                <ul className="reviews__list">
-                  {offer.reviews.map((reveiw) => (
-                    <li className="reviews__item" key={reveiw.id}>
-                      <div className="reviews__user user">
-                        <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                          <img
-                            className="reviews__avatar user__avatar"
-                            src={reveiw.user.avatarImageSrc}
-                            width="54"
-                            height="54"
-                            alt="Reviews avatar"
-                          />
-                        </div>
-                        <span className="reviews__user-name">
-                          {reveiw.user.name}
-                        </span>
-                      </div>
-                      <div className="reviews__info">
-                        <Rating
-                          starValue={reveiw.stars}
-                          containerClassName="reviews__rating"
-                          starsClassName="reviews__stars"
-                        />
-                        <p className="reviews__text">{reveiw.text}</p>
-                        <time
-                          className="reviews__time"
-                          dateTime={reveiw.datetime}
-                        >
-                          {reveiw.readableDate}
-                        </time>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                <ReviewsList reviews={offer.reviews} />
                 <CommentForm />
               </section>
             </div>
