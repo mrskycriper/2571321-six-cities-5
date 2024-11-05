@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Header from '@/components/header/header';
 import Map from '@/components/map/map';
-import { OffersListMain } from '@/components/offers-lists/offers-lists';
+import OffersList from '@/components/offers-list/offers-list';
 import { City } from '@/types/city/city';
 import { OfferEntity } from '@/types/offer/offer';
 import { cities } from '@/mocks/cities/cities';
@@ -94,7 +94,7 @@ function Main({ offers }: MainProps): JSX.Element {
                   </li>
                 </ul>
               </form>
-              <OffersListMain offers={activeOffers} />
+              <OffersList offers={activeOffers} type='Main'/>
             </section>
             <div className="cities__right-section">
               <Map

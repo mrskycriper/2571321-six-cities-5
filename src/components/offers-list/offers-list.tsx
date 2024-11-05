@@ -1,16 +1,29 @@
 import { useState } from 'react';
 import { OfferEntity } from '@/types/offer/offer';
 import OfferCard from '@/components/offer-card/offer-card';
+import classNames from 'classnames';
 
-type OffersListMainProps = {
+type OffersListProps = {
   offers: OfferEntity[];
+  type: 'Main' | 'Nearby';
 };
 
-function OffersListMain({ offers }: OffersListMainProps): JSX.Element {
+function OffersList({ offers, type }: OffersListProps): JSX.Element {
   const [, setActiveOfferId] = useState<string | null>(null);
 
+  let containerClassName: string;
+
+  switch (type) {
+    case 'Main':
+      containerClassName = 'cities__places-list tabs__content';
+      break;
+    case 'Nearby':
+      containerClassName = 'near-places__list';
+      break;
+  }
+
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className={classNames(containerClassName, 'places__list')} >
       {offers.map((offer) => (
         <OfferCard
           offer={offer}
@@ -21,11 +34,11 @@ function OffersListMain({ offers }: OffersListMainProps): JSX.Element {
           onMouseLeave={() => {
             setActiveOfferId(null);
           }}
-          type={'Main'}
+          type={type}
         />
       ))}
     </div>
   );
 }
 
-export default OffersListMain;
+export default OffersList;
