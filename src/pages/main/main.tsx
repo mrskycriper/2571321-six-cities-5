@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Header from '@/components/header/header';
+import CitiesList from '@/components/cities-list/cities-list';
 import Map from '@/components/map/map';
 import OffersList from '@/components/offers-list/offers-list';
 import { City } from '@/types/city/city';
@@ -45,24 +46,7 @@ function Main({ offers }: MainProps): JSX.Element {
       <Header isLoggedIn />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              {Object.entries(cities).map(([cityName, city]) => (
-                <li className="locations__item" key={cityName}>
-                  <a
-                    className={`locations__item-link tabs__item ${
-                      cityName === activeCity.title ? ' tabs__item--active' : ''
-                    }`}
-                    onClick={() => setActiveCity(city)}
-                  >
-                    <span>{cityName}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </section>
-        </div>
+        <CitiesList />
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
