@@ -10,16 +10,15 @@ import AuthChecker from '@/components/auth-checker/auth-checker';
 import { OfferEntity } from '@/types/offer/offer';
 
 type AppProps = {
-  offers: OfferEntity[];
   favoriteOffers: OfferEntity[];
 };
 
-function App({ offers, favoriteOffers }: AppProps): JSX.Element {
+function App({ favoriteOffers }: AppProps): JSX.Element {
   return (
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Main offers={offers} />} />
+          <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />
           <Route
             path="/favorites"

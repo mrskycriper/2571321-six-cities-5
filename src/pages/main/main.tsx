@@ -1,43 +1,27 @@
 import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { setOffers } from '@/store/actions';
 import Header from '@/components/header/header';
 import CitiesList from '@/components/cities-list/cities-list';
 import Map from '@/components/map/map';
 import OffersList from '@/components/offers-list/offers-list';
-import { City } from '@/types/city/city';
-import { OfferEntity } from '@/types/offer/offer';
-import { cities } from '@/constants/cities/cities';
 import offersToPoints from '@/utils/offers-to-points/offers-to-points';
+import getCityOffers from '@/utils/get-offers/get-city-offers';
 
-type MainProps = {
-  offers: OfferEntity[];
-};
-
-const defaultCity: City = cities['Amsterdam'];
-
-function Main({ offers }: MainProps): JSX.Element {
-  const [activeCity, setActiveCity] = useState(defaultCity);
-
-  const getActiveOffers = (
-    allOffers: OfferEntity[],
-    newCity: City
-  ): OfferEntity[] =>
-    allOffers.filter(
-      (offer: OfferEntity) => offer.city.title === newCity.title
-    );
-
-  const [activeOffers, setActiveOffers] = useState(
-    getActiveOffers(offers, activeCity)
-  );
+function Main(): JSX.Element {
+  const city = useAppSelector((state) => state.city);
+  const offers = useAppSelector((state) => state.offers);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    setActiveOffers(getActiveOffers(offers, activeCity));
-  }, [offers, activeCity]);
+    dispatch(setOffers(getCityOffers(city)));
+  }, [dispatch, city]);
 
   const [offersPoints, setOffersPoints] = useState(offersToPoints(offers));
 
   useEffect(() => {
-    setOffersPoints(offersToPoints(activeOffers));
-  }, [activeOffers]);
+    setOffersPoints(offersToPoints(offers));
+  }, [offers]);
 
   const [activePoint] = useState(undefined);
 
@@ -51,7 +35,7 @@ function Main({ offers }: MainProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{`${activeOffers.length} places to stay in ${activeCity.title}`}</b>
+              <b className="places__found">{`${offers.length} places to stay in ${city.title}`}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -78,11 +62,11 @@ function Main({ offers }: MainProps): JSX.Element {
                   </li>
                 </ul>
               </form>
-              <OffersList offers={activeOffers} type='Main'/>
+              <OffersList offers={offers} type="Main" />
             </section>
             <div className="cities__right-section">
               <Map
-                city={activeCity}
+                city={city}
                 points={offersPoints}
                 selectedPoint={activePoint}
               />
