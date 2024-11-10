@@ -4,7 +4,7 @@ import Map from '@/components/map/map';
 import OffersList from '@/components/offers-list/offers-list';
 import { City } from '@/types/city/city';
 import { OfferEntity } from '@/types/offer/offer';
-import { cities } from '@/mocks/cities/cities';
+import { cities } from '@/constants/cities/cities';
 import offersToPoints from '@/utils/offers-to-points/offers-to-points';
 
 type MainProps = {
