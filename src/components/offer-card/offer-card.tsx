@@ -1,24 +1,24 @@
-import { MouseEventHandler } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import { OfferEntity } from '@/types/offer/offer';
 import BookmarkButton from '@/components/bookmark-button/bookmark-button';
 import Rating from '@/components/rating/rating';
+import { OfferEntity } from '@/types/offer/offer';
+import { Point } from '@/types/point/point';
+import offersToPoints from '@/utils/offers-to-points/offers-to-points';
 
 type OfferCardProps = {
   offer: OfferEntity;
-  onMouseOver?: MouseEventHandler;
-  onMouseLeave?: MouseEventHandler;
   type: 'Main' | 'Favorites' | 'Nearby';
+  onOfferSelect?: (point: Point | undefined) => void;
 };
 
 function OfferCard({
   offer,
-  onMouseOver,
-  onMouseLeave,
   type,
+  onOfferSelect,
 }: OfferCardProps): JSX.Element {
   const coverImage = offer.images.filter((el) => el.isCoverImage);
+  const offerPoint = offersToPoints([offer])[0];
 
   let cardClassName: string;
   let imageWrapperClassName: string;
@@ -49,8 +49,8 @@ function OfferCard({
   return (
     <article
       className={classNames(cardClassName, 'place-card')}
-      onMouseOver={onMouseOver}
-      onMouseLeave={onMouseLeave}
+      onMouseOver={onOfferSelect ? () => onOfferSelect(offerPoint) : undefined}
+      onMouseLeave={onOfferSelect ? () => onOfferSelect(undefined) : undefined}
     >
       {offer.mark ? (
         <div className="place-card__mark">
@@ -58,7 +58,10 @@ function OfferCard({
         </div>
       ) : null}
       <div
-        className={classNames(imageWrapperClassName, 'place-card__image-wrapper')}
+        className={classNames(
+          imageWrapperClassName,
+          'place-card__image-wrapper'
+        )}
       >
         <Link to={`/offer/${offer.id}`}>
           <img

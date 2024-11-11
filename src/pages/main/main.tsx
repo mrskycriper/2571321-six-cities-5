@@ -1,10 +1,13 @@
-import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { setOffers } from '@/store/actions';
-import Header from '@/components/header/header';
+import { useEffect, useMemo, useState } from 'react';
 import CitiesList from '@/components/cities-list/cities-list';
+import Header from '@/components/header/header';
 import Map from '@/components/map/map';
 import OffersList from '@/components/offers-list/offers-list';
+import SortingFilter from '@/components/sorting-filter';
+import { SortOrder } from '@/components/sorting-filter/types';
+import { setOffers } from '@/store/actions';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { Point } from '@/types/point/point';
 import offersToPoints from '@/utils/offers-to-points/offers-to-points';
 import getCityOffers from '@/utils/get-offers/get-city-offers';
 
@@ -17,13 +20,31 @@ function Main(): JSX.Element {
     dispatch(setOffers(getCityOffers(city)));
   }, [dispatch, city]);
 
-  const [offersPoints, setOffersPoints] = useState(offersToPoints(offers));
+  const [filter, setFilter] = useState<SortOrder>(SortOrder.POPULAR);
+  const handleFilterChange = (newFilter: SortOrder) => {
+    setFilter(newFilter);
+  };
 
-  useEffect(() => {
-    setOffersPoints(offersToPoints(offers));
-  }, [offers]);
+  const offersPoints = useMemo(() => offersToPoints(offers), [offers]);
+  const [activePoint, setActivePoint] = useState<Point | undefined>(undefined);
+  const handleOfferSelect = (point: Point | undefined) => {
+    setActivePoint(point);
+  };
 
-  const [activePoint] = useState(undefined);
+  const sortedOffers = useMemo(() => {
+    switch (filter) {
+      case SortOrder.TOP_RATED:
+        return offers.toSorted(
+          (a, b) => b.rating.numericValue - a.rating.numericValue
+        );
+      case SortOrder.HIGH_TO_LOW:
+        return offers.toSorted((a, b) => b.price.value - a.price.value);
+      case SortOrder.LOW_TO_HIGH:
+        return offers.toSorted((a, b) => a.price.value - b.price.value);
+      default:
+        return offers;
+    }
+  }, [offers, filter]);
 
   return (
     <div className="page page--gray page--main">
@@ -36,33 +57,15 @@ function Main(): JSX.Element {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{`${offers.length} places to stay in ${city.title}`}</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex={0}>
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li
-                    className="places__option places__option--active"
-                    tabIndex={0}
-                  >
-                    Popular
-                  </li>
-                  <li className="places__option" tabIndex={0}>
-                    Price: low to high
-                  </li>
-                  <li className="places__option" tabIndex={0}>
-                    Price: high to low
-                  </li>
-                  <li className="places__option" tabIndex={0}>
-                    Top rated first
-                  </li>
-                </ul>
-              </form>
-              <OffersList offers={offers} type="Main" />
+              <SortingFilter
+                currentFilter={filter}
+                onFilterChange={handleFilterChange}
+              />
+              <OffersList
+                offers={sortedOffers}
+                type="Main"
+                onOfferSelect={handleOfferSelect}
+              />
             </section>
             <div className="cities__right-section">
               <Map
