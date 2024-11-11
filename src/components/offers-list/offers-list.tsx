@@ -1,16 +1,19 @@
-import { useState } from 'react';
-import { OfferEntity } from '@/types/offer/offer';
-import OfferCard from '@/components/offer-card/offer-card';
 import classNames from 'classnames';
+import OfferCard from '@/components/offer-card/offer-card';
+import { OfferEntity } from '@/types/offer/offer';
+import { Point } from '@/types/point/point';
 
 type OffersListProps = {
   offers: OfferEntity[];
   type: 'Main' | 'Nearby';
+  onOfferSelect?: (point: Point | undefined) => void;
 };
 
-function OffersList({ offers, type }: OffersListProps): JSX.Element {
-  const [, setActiveOfferId] = useState<string | null>(null);
-
+function OffersList({
+  offers,
+  type,
+  onOfferSelect,
+}: OffersListProps): JSX.Element {
   let containerClassName: string;
 
   switch (type) {
@@ -23,17 +26,12 @@ function OffersList({ offers, type }: OffersListProps): JSX.Element {
   }
 
   return (
-    <div className={classNames(containerClassName, 'places__list')} >
+    <div className={classNames(containerClassName, 'places__list')}>
       {offers.map((offer) => (
         <OfferCard
           offer={offer}
           key={offer.id}
-          onMouseOver={() => {
-            setActiveOfferId(offer.id);
-          }}
-          onMouseLeave={() => {
-            setActiveOfferId(null);
-          }}
+          onOfferSelect={onOfferSelect}
           type={type}
         />
       ))}

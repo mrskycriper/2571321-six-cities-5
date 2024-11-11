@@ -1,14 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { setOffers } from '@/store/actions';
-import Header from '@/components/header/header';
-import SortingFilter from '@/components/sorting-filter';
 import CitiesList from '@/components/cities-list/cities-list';
+import Header from '@/components/header/header';
 import Map from '@/components/map/map';
 import OffersList from '@/components/offers-list/offers-list';
+import SortingFilter from '@/components/sorting-filter';
+import { SortOrder } from '@/components/sorting-filter/types';
+import { setOffers } from '@/store/actions';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { Point } from '@/types/point/point';
 import offersToPoints from '@/utils/offers-to-points/offers-to-points';
 import getCityOffers from '@/utils/get-offers/get-city-offers';
-import { SortOrder } from '@/components/sorting-filter/types';
 
 function Main(): JSX.Element {
   const city = useAppSelector((state) => state.city);
@@ -19,23 +20,23 @@ function Main(): JSX.Element {
     dispatch(setOffers(getCityOffers(city)));
   }, [dispatch, city]);
 
-  const [offersPoints, setOffersPoints] = useState(offersToPoints(offers));
-
-  useEffect(() => {
-    setOffersPoints(offersToPoints(offers));
-  }, [offers]);
-
-  const [activePoint] = useState(undefined);
-
   const [filter, setFilter] = useState<SortOrder>(SortOrder.POPULAR);
   const handleFilterChange = (newFilter: SortOrder) => {
     setFilter(newFilter);
   };
 
+  const offersPoints = useMemo(() => offersToPoints(offers), [offers]);
+  const [activePoint, setActivePoint] = useState<Point | undefined>(undefined);
+  const handleOfferSelect = (point: Point | undefined) => {
+    setActivePoint(point);
+  };
+
   const sortedOffers = useMemo(() => {
     switch (filter) {
       case SortOrder.TOP_RATED:
-        return offers.toSorted((a, b) => b.rating.numericValue - a.rating.numericValue);
+        return offers.toSorted(
+          (a, b) => b.rating.numericValue - a.rating.numericValue
+        );
       case SortOrder.HIGH_TO_LOW:
         return offers.toSorted((a, b) => b.price.value - a.price.value);
       case SortOrder.LOW_TO_HIGH:
@@ -60,7 +61,11 @@ function Main(): JSX.Element {
                 currentFilter={filter}
                 onFilterChange={handleFilterChange}
               />
-              <OffersList offers={sortedOffers} type="Main" />
+              <OffersList
+                offers={sortedOffers}
+                type="Main"
+                onOfferSelect={handleOfferSelect}
+              />
             </section>
             <div className="cities__right-section">
               <Map
