@@ -1,17 +1,17 @@
 import { useParams } from 'react-router-dom';
 import { useMemo } from 'react';
-import { allOffers } from '@/mocks/offers/offers';
-import { Error404 } from '@/pages/errors/errors';
-import CommentForm from '@/components/comment-form/comment-form';
-import Rating from '@/components/rating/rating';
-import Header from '@/components/header/header';
-import ReviewsList from '@/components/reveiws-list/reveiws-list';
-import Map from '@/components/map/map';
-import { OfferEntity } from '@/types/offer/offer';
-import offersToPoints from '@/utils/offers-to-points/offers-to-points';
-import { Points } from '@/types/point/point';
-import { City } from '@/types/city/city';
-import OffersList from '@/components/offers-list/offers-list';
+import { allOffers } from '@/mocks/offers';
+import { Error404 } from '@/pages/errors';
+import CommentForm from '@/components/comment-form';
+import Rating from '@/components/rating';
+import Header from '@/components/header';
+import ReviewsList from '@/components/reveiws-list';
+import Map from '@/components/map';
+import { OfferEntity } from '@/types/offer';
+import offersToPoints from '@/utils/offers-to-points';
+import { Points } from '@/types/point';
+import { City } from '@/types/city';
+import OffersList from '@/components/offers-list';
 
 function Offer(): JSX.Element {
   const { id } = useParams();

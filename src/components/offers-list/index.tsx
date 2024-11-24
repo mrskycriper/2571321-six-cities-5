@@ -1,7 +1,7 @@
 import classNames from 'classnames';
-import OfferCard from '@/components/offer-card/offer-card';
-import { OfferEntity } from '@/types/offer/offer';
-import { Point } from '@/types/point/point';
+import OfferCard from '@/components/offer-card';
+import { OfferEntity } from '@/types/offer';
+import { Point } from '@/types/point';
 
 type OffersListProps = {
   offers: OfferEntity[];

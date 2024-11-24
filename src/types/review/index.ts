@@ -1,4 +1,4 @@
-import { UserEntity } from '@/types/user/user';
+import { UserEntity } from '@/types/user';
 
 export type ReviewItem = {
   id: string;

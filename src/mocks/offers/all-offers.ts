@@ -1,5 +1,5 @@
-import { OfferEntity } from '@/types/offer/offer';
-import { cities } from '@/constants/cities/cities';
+import { OfferEntity } from '@/types/offer';
+import { cities } from '@/constants/cities';
 
 export const allOffers: OfferEntity[] = [
   {

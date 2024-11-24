@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import BookmarkButton from '@/components/bookmark-button/bookmark-button';
-import Rating from '@/components/rating/rating';
-import { OfferEntity } from '@/types/offer/offer';
-import { Point } from '@/types/point/point';
-import offersToPoints from '@/utils/offers-to-points/offers-to-points';
+import BookmarkButton from '@/components/bookmark-button';
+import Rating from '@/components/rating';
+import { OfferEntity } from '@/types/offer';
+import { Point } from '@/types/point';
+import offersToPoints from '@/utils/offers-to-points';
 
 type OfferCardProps = {
   offer: OfferEntity;

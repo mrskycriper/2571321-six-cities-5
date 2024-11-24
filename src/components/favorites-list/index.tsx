@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
-import { OfferEntity } from '@/types/offer/offer';
-import OfferCard from '@/components/offer-card/offer-card';
-import { CityName } from '@/types/city/city';
+import { OfferEntity } from '@/types/offer';
+import OfferCard from '@/components/offer-card';
+import { CityName } from '@/types/city';
 
 type FavoritesListProps = {
   offers: OfferEntity[];

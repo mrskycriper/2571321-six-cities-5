@@ -1,6 +1,6 @@
-import { UserEntity } from '@/types/user/user';
-import { City } from '@/types/city/city';
-import { ReviewItem } from '@/types/review/review';
+import { UserEntity } from '@/types/user';
+import { City } from '@/types/city';
+import { ReviewItem } from '@/types/review';
 
 export type OfferImage = {
   id: number;

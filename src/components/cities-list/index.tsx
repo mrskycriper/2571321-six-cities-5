@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setCity } from '@/store/actions';
-import { cities } from '@/constants/cities/cities';
+import { cities } from '@/constants/cities';
 
 function CitiesList(): JSX.Element {
   const city = useAppSelector((state) => state.city);

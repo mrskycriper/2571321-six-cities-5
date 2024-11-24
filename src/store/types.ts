@@ -1,5 +1,5 @@
-import { City } from '@/types/city/city';
-import { OfferEntity } from '@/types/offer/offer';
+import { City } from '@/types/city';
+import { OfferEntity } from '@/types/offer';
 import { store } from '.';
 
 export type State = {

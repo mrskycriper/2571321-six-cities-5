@@ -1,5 +1,5 @@
-import { ReviewItem } from '@/types/review/review';
-import Rating from '@/components/rating/rating';
+import { ReviewItem } from '@/types/review';
+import Rating from '@/components/rating';
 
 type ReviewProps = {
   review: ReviewItem;

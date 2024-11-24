@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { cities } from '@/constants/cities/cities';
-import getCityOffers from '@/utils/get-offers/get-city-offers';
+import { cities } from '@/constants/cities';
+import getCityOffers from '@/utils/get-offers';
 import { setCity, setOffers } from './actions';
 import { State } from './types';
 

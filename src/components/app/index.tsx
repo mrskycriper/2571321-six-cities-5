@@ -1,13 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from '@/store';
-import Main from '@/pages/main/main';
-import Login from '@/pages/login/login';
-import Favorites from '@/pages/favorites/favorites';
-import Offer from '@/pages/offer/offer';
-import { Error404 } from '@/pages/errors/errors';
-import AuthChecker from '@/components/auth-checker/auth-checker';
-import { OfferEntity } from '@/types/offer/offer';
+import Main from '@/pages/main';
+import Login from '@/pages/login';
+import Favorites from '@/pages/favorites';
+import Offer from '@/pages/offer';
+import { Error404 } from '@/pages/errors';
+import AuthChecker from '@/components/auth-checker';
+import { OfferEntity } from '@/types/offer';
 
 type AppProps = {
   favoriteOffers: OfferEntity[];

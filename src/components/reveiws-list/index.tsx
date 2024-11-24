@@ -1,5 +1,5 @@
-import { ReviewItem } from '@/types/review/review';
-import Review from '../reveiw/reveiw';
+import { ReviewItem } from '@/types/review';
+import Review from '../reveiw';
 
 type ReviewsListProps = {
   reviews: ReviewItem[];

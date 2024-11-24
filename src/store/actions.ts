@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
-import { City } from '@/types/city/city';
-import { OfferEntity } from '@/types/offer/offer';
+import { City } from '@/types/city';
+import { OfferEntity } from '@/types/offer';
 
 export const Actions = {
   SET_CITY: 'SET_CITY',

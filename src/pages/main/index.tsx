@@ -1,15 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
-import CitiesList from '@/components/cities-list/cities-list';
-import Header from '@/components/header/header';
-import Map from '@/components/map/map';
-import OffersList from '@/components/offers-list/offers-list';
+import CitiesList from '@/components/cities-list';
+import Header from '@/components/header';
+import Map from '@/components/map';
+import OffersList from '@/components/offers-list';
 import SortingFilter from '@/components/sorting-filter';
 import { SortOrder } from '@/components/sorting-filter/types';
 import { setOffers } from '@/store/actions';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { Point } from '@/types/point/point';
-import offersToPoints from '@/utils/offers-to-points/offers-to-points';
-import getCityOffers from '@/utils/get-offers/get-city-offers';
+import { Point } from '@/types/point';
+import offersToPoints from '@/utils/offers-to-points';
+import getCityOffers from '@/utils/get-offers';
 
 function Main(): JSX.Element {
   const city = useAppSelector((state) => state.city);

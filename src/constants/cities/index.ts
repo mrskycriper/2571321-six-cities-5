@@ -1,4 +1,4 @@
-import { City, CityName } from '@/types/city/city';
+import { City, CityName } from '@/types/city';
 
 export const cities: Record<CityName, City> = {
   Paris: {

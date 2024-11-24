@@ -1,5 +1,5 @@
-import { OfferEntity } from '@/types/offer/offer';
-import { Points } from '@/types/point/point';
+import { OfferEntity } from '@/types/offer';
+import { Points } from '@/types/point';
 
 const offersToPoints = (allOffers: OfferEntity[]): Points => {
   const points: Points = [];
