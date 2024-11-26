@@ -1,55 +1,29 @@
-import { UserEntity } from '@/types/user';
 import { City } from '@/types/city';
-import { ReviewItem } from '@/types/review';
+import { MapLocation } from '@/types/map-location';
+import { UserShort } from '@/types/user';
 
-export type OfferImage = {
-  id: number;
-  src: string;
-  alt: string;
-  isCoverImage?: boolean;
-};
-
-export type OfferMark = 'Premium';
-
-export type OfferRating = {
-  numericValue: number;
-  starValue: number;
-};
-
-export type OfferFeatures = {
-  placeType: 'Apartment' | 'Room';
-  bedroomCount?: number;
-  maxAdultOccupancy: number;
-};
-
-export type OfferPrice = {
-  value: number;
-  period: 'night';
-};
-
-export type OfferInsideItem = {
-  id: number;
-  text: string;
-};
-
-export type OfferDescriptionItem = {
-  id: number;
-  text: string;
-};
-
-export type OfferEntity = {
+export type OfferBase = {
   id: string;
+  title: string;
+  type: string;
+  price: number;
   city: City;
-  images: OfferImage[];
-  mark?: OfferMark;
-  name: string;
-  rating: OfferRating;
-  features: OfferFeatures;
-  price: OfferPrice;
-  insideList: OfferInsideItem[];
-  host: UserEntity;
-  description: OfferDescriptionItem[];
-  reviews: ReviewItem[];
-  latitude: number;
-  longitude: number;
+  location: MapLocation;
+  isFavorite?: boolean;
+  isPremium: boolean;
+  rating: number;
+  previewImage: string;
+};
+
+export type OfferShort = OfferBase & {
+  previewImage: string;
+};
+
+export type OfferLong = OfferBase & {
+  description: string;
+  bedrooms: number;
+  goods: string[];
+  host: UserShort;
+  images: string[];
+  maxAdults: number;
 };

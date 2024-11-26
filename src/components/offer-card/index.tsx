@@ -2,12 +2,12 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import BookmarkButton from '@/components/bookmark-button';
 import Rating from '@/components/rating';
-import { OfferEntity } from '@/types/offer';
+import { OfferShort } from '@/types/offer';
 import { Point } from '@/types/point';
 import offersToPoints from '@/utils/offers-to-points';
 
 type OfferCardProps = {
-  offer: OfferEntity;
+  offer: OfferShort;
   type: 'Main' | 'Favorites' | 'Nearby';
   onOfferSelect?: (point: Point | undefined) => void;
 };
@@ -17,7 +17,6 @@ function OfferCard({
   type,
   onOfferSelect,
 }: OfferCardProps): JSX.Element {
-  const coverImage = offer.images.filter((el) => el.isCoverImage);
   const offerPoint = offersToPoints([offer])[0];
 
   let cardClassName: string;
@@ -52,9 +51,9 @@ function OfferCard({
       onMouseOver={onOfferSelect ? () => onOfferSelect(offerPoint) : undefined}
       onMouseLeave={onOfferSelect ? () => onOfferSelect(undefined) : undefined}
     >
-      {offer.mark ? (
+      {offer.isPremium ? (
         <div className="place-card__mark">
-          <span>{offer.mark}</span>
+          <span>Premium</span>
         </div>
       ) : null}
       <div
@@ -66,32 +65,30 @@ function OfferCard({
         <Link to={`/offer/${offer.id}`}>
           <img
             className="place-card__image"
-            src={coverImage[0].src}
+            src={offer.previewImage}
             width={imageWidth}
             height={imageHeight}
-            alt={coverImage[0].alt}
+            alt="Place image"
           />
         </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{offer.price.value}</b>
-            <span className="place-card__price-text">
-              &#47;&nbsp;{offer.price.period}
-            </span>
+            <b className="place-card__price-value">&euro;{offer.price}</b>
+            <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <BookmarkButton marked={type === 'Favorites'} />
         </div>
         <Rating
-          starValue={offer.rating.starValue}
+          value={offer.rating}
           containerClassName={'place-card__rating'}
           starsClassName={'place-card__stars'}
         />
         <h2 className="place-card__name">
-          <Link to={`/offer/${offer.id}`}>{offer.name}</Link>
+          <Link to={`/offer/${offer.id}`}>{offer.title}</Link>
         </h2>
-        <p className="place-card__type">{offer.features.placeType}</p>
+        <p className="place-card__type">{offer.type}</p>
       </div>
     </article>
   );

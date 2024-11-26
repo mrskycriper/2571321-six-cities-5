@@ -1,7 +1,10 @@
-export type UserStatus = 'Pro';
-
-export type UserEntity = {
-  avatarImageSrc: string;
+export type UserShort = {
   name: string;
-  status?: UserStatus;
+  avatarUrl: string;
+  isPro: boolean;
+};
+
+export type UserLong = UserShort & {
+  email: string;
+  token: string;
 };

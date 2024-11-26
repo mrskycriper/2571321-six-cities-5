@@ -1,7 +1,7 @@
-import { OfferEntity } from '@/types/offer';
+import { OfferShort } from '@/types/offer';
 import { cities } from '@/constants/cities';
 
-export const allOffers: OfferEntity[] = [
+export const allOffers: OfferShort[] = [
   {
     id: 'bd040d67-8030-48a8-b47b-0b4f5b30ccd5',
     city: cities['Amsterdam'],

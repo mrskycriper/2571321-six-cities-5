@@ -14,7 +14,7 @@ function CitiesList(): JSX.Element {
             <li className="locations__item" key={cityName}>
               <a
                 className={`locations__item-link tabs__item ${
-                  cityName === city.title ? ' tabs__item--active' : ''
+                  cityName === city.name ? ' tabs__item--active' : ''
                 }`}
                 onClick={() => dispatch(setCity(cityObject))}
               >

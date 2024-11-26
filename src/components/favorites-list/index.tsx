@@ -1,24 +1,24 @@
 import { useMemo } from 'react';
-import { OfferEntity } from '@/types/offer';
+import { OfferShort } from '@/types/offer';
 import OfferCard from '@/components/offer-card';
 import { CityName } from '@/types/city';
 
 type FavoritesListProps = {
-  offers: OfferEntity[];
+  offers: OfferShort[];
 };
 
 function FavoritesList({
   offers,
 }: FavoritesListProps): JSX.Element {
   const cityOffersMap = useMemo(() => {
-    const map: Partial<Record<CityName, OfferEntity[]>> = {};
+    const map: Partial<Record<CityName, OfferShort[]>> = {};
 
     offers.forEach((offer) => {
       const city = offer.city;
-      if (!map[city.title]) {
-        map[city.title] = [];
+      if (!map[city.name]) {
+        map[city.name] = [];
       }
-      map[city.title]?.push(offer);
+      map[city.name]?.push(offer);
     });
 
     return map;

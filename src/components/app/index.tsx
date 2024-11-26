@@ -7,10 +7,10 @@ import Favorites from '@/pages/favorites';
 import Offer from '@/pages/offer';
 import { Error404 } from '@/pages/errors';
 import AuthChecker from '@/components/auth-checker';
-import { OfferEntity } from '@/types/offer';
+import { OfferShort } from '@/types/offer';
 
 type AppProps = {
-  favoriteOffers: OfferEntity[];
+  favoriteOffers: OfferShort[];
 };
 
 function App({ favoriteOffers }: AppProps): JSX.Element {

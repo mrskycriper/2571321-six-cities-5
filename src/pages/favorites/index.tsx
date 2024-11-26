@@ -1,10 +1,10 @@
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 import FavoritesList from '@/components/favorites-list';
-import { OfferEntity } from '@/types/offer';
+import { OfferShort } from '@/types/offer';
 
 type FavoritesProps = {
-  offers: OfferEntity[];
+  offers: OfferShort[];
 };
 
 function Favorites({ offers }: FavoritesProps): JSX.Element {

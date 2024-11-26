@@ -1,3 +1,5 @@
+import { MapLocation } from '@/types/map-location';
+
 export type CityName =
   | 'Paris'
   | 'Cologne'
@@ -7,8 +9,6 @@ export type CityName =
   | 'Dusseldorf';
 
 export type City = {
-  title: CityName;
-  lat: number;
-  lng: number;
-  zoom: number;
+  name: CityName;
+  location: MapLocation;
 };

@@ -2,39 +2,51 @@ import { City, CityName } from '@/types/city';
 
 export const cities: Record<CityName, City> = {
   Paris: {
-    title: 'Paris',
-    lat: 48.856667,
-    lng: 2.352222,
-    zoom: 10
+    name: 'Paris',
+    location: {
+      latitude: 48.85661,
+      longitude: 2.351499,
+      zoom: 13,
+    },
   },
   Cologne: {
-    title: 'Cologne',
-    lat: 50.936389,
-    lng: 6.952778,
-    zoom: 10
+    name: 'Cologne',
+    location: {
+      latitude: 50.938361,
+      longitude: 6.959974,
+      zoom: 13,
+    },
   },
   Brussels: {
-    title: 'Brussels',
-    lat: 50.846667,
-    lng: 4.3525,
-    zoom: 10
+    name: 'Brussels',
+    location: {
+      latitude: 50.846557,
+      longitude: 4.351697,
+      zoom: 13,
+    },
   },
   Amsterdam: {
-    title: 'Amsterdam',
-    lat: 52.372778,
-    lng: 4.893611,
-    zoom: 10
+    name: 'Amsterdam',
+    location: {
+      latitude: 52.37454,
+      longitude: 4.897976,
+      zoom: 13,
+    },
   },
   Hamburg: {
-    title: 'Hamburg',
-    lat: 53.55,
-    lng: 10,
-    zoom: 10
+    name: 'Hamburg',
+    location: {
+      latitude: 53.550341,
+      longitude: 10.000654,
+      zoom: 13,
+    },
   },
   Dusseldorf: {
-    title: 'Dusseldorf',
-    lat: 51.233333,
-    lng: 6.783333,
-    zoom: 10
+    name: 'Dusseldorf',
+    location: {
+      latitude: 51.225402,
+      longitude: 6.776314,
+      zoom: 13,
+    },
   },
 };

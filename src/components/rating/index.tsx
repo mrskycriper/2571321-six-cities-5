@@ -1,29 +1,33 @@
 import classNames from 'classnames';
 
 type RatingProps = {
-  numericValue?: number;
-  starValue: number;
+  value: number;
+  showRawValue?: boolean;
   containerClassName: string;
   starsClassName: string;
   valueClassName?: string;
 };
 
 function Rating({
-  numericValue,
-  starValue,
+  value,
+  showRawValue,
   containerClassName,
   starsClassName,
   valueClassName = 'offer__rating-value',
 }: RatingProps): JSX.Element {
+  const rawValue = value;
+  const roundedValue = Math.round(value);
+  const starValue = `${20 * roundedValue}%`;
+
   return (
     <div className={classNames(containerClassName, 'rating')}>
       <div className={classNames(starsClassName, 'rating__stars')}>
-        <span style={{ width: `${20 * starValue}%` }}></span>
+        <span style={{ width: starValue }}></span>
         <span className="visually-hidden">Rating</span>
       </div>
-      {numericValue !== undefined ? (
+      {showRawValue ? (
         <span className={classNames(valueClassName, 'rating__value')}>
-          {numericValue}
+          {rawValue}
         </span>
       ) : null}
     </div>
