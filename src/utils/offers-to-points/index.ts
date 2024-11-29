@@ -1,11 +1,11 @@
 import { OfferBase } from '@/types/offer';
 import { Points } from '@/types/point';
 
-const offersToPoints = (allOffers: OfferBase[]): Points => {
+const offersToPoints = (offers: OfferBase[]): Points => {
   const points: Points = [];
-  allOffers.map((offer: OfferBase) =>
+  offers.map((offer: OfferBase) =>
     points.push({
-      title: offer.title,
+      title: offer.id,
       lat: offer.location.latitude,
       lng: offer.location.longitude,
     })
