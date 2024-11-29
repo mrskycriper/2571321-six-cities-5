@@ -5,8 +5,10 @@ import Favorites from '@/pages/favorites';
 import Offer from '@/pages/offer';
 import { Error404 } from '@/pages/errors';
 import AuthChecker from '@/components/auth-checker';
+import useAppInit from '@/hooks/use-app-init';
 
 function App(): JSX.Element {
+  useAppInit();
   return (
     <BrowserRouter>
       <Routes>
