@@ -1,17 +1,14 @@
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 import FavoritesList from '@/components/favorites-list';
-import { OfferShort } from '@/types/offer';
+// import { OfferShort } from '@/types/offer';
 
-type FavoritesProps = {
-  offers: OfferShort[];
-};
-
-function Favorites({ offers }: FavoritesProps): JSX.Element {
+function Favorites(): JSX.Element {
+  // TODO
   return (
     <div className="page">
       <Header isLoggedIn />
-      <FavoritesList offers={offers} />
+      <FavoritesList offers={[]} />
       <Footer />
     </div>
   );
