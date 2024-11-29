@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { sortFilters } from './constants';
+import { applySortOrder } from '@/store/actions';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { SortOrder } from '@/types/filter';
+import { sortFilters } from './constants';
 
-type SortingFilterProps = {
-  currentFilter: SortOrder;
-  onFilterChange: (filter: SortOrder) => void;
-};
+function SortingFilter(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const { sortOrder } = useAppSelector((state) => state.offersReducer);
+  const handleFilterChange = (newSortOrder: SortOrder) => {
+    dispatch(applySortOrder(newSortOrder));
+  };
 
-function SortingFilter({
-  currentFilter,
-  onFilterChange,
-}: SortingFilterProps): JSX.Element {
   const [showFilters, setShowFilters] = useState(false);
 
   return (
@@ -21,7 +21,7 @@ function SortingFilter({
         tabIndex={0}
         onClick={() => setShowFilters(true)}
       >
-        {currentFilter}
+        {sortOrder}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
@@ -35,11 +35,11 @@ function SortingFilter({
         {sortFilters.map((filter) => (
           <li
             className={`places__option ${
-              filter === currentFilter ? 'places__option--active' : null
+              filter === sortOrder ? 'places__option--active' : null
             }`}
             tabIndex={0}
             key={filter}
-            onClick={() => onFilterChange(filter)}
+            onClick={() => handleFilterChange(filter)}
           >
             {filter}
           </li>

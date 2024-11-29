@@ -1,10 +1,14 @@
+import { applyCity } from '@/store/actions';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { setCity } from '@/store/actions';
 import { cities } from '@/constants/cities';
+import { City } from '@/types/city';
 
 function CitiesList(): JSX.Element {
-  const city = useAppSelector((state) => state.city);
   const dispatch = useAppDispatch();
+  const { city } = useAppSelector((state) => state.offersReducer);
+  const handleCityChange = (newCity: City) => {
+    dispatch(applyCity(newCity));
+  };
 
   return (
     <div className="tabs">
@@ -16,7 +20,7 @@ function CitiesList(): JSX.Element {
                 className={`locations__item-link tabs__item ${
                   cityName === city.name ? ' tabs__item--active' : ''
                 }`}
-                onClick={() => dispatch(setCity(cityObject))}
+                onClick={() => handleCityChange(cityObject)}
               >
                 <span>{cityName}</span>
               </a>

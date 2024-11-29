@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 import OfferCard from '@/components/offer-card';
-import { OfferLong } from '@/types/offer';
+import { OfferShort } from '@/types/offer';
 import { Point } from '@/types/point';
 
 type OffersListProps = {
-  offers: OfferLong[];
+  offers: OfferShort[];
   type: 'Main' | 'Nearby';
   onOfferSelect?: (point: Point | undefined) => void;
 };
