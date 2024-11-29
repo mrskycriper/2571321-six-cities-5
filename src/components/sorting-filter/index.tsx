@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { sortFilters } from './constants';
-import { SortOrder } from './types';
+import { SortOrder } from '@/types/filter';
 
 type SortingFilterProps = {
   currentFilter: SortOrder;

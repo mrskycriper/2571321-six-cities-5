@@ -1,4 +1,4 @@
-import { SortOrder } from './types';
+import { SortOrder } from '@/types/filter';
 
 export const sortFilters: SortOrder[] = [
   SortOrder.POPULAR,
