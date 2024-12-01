@@ -1,10 +1,22 @@
 import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { APP_ROUTES } from '@/constants/routes';
+import { logout } from '@/store/actions';
 
 type HeaderProps = {
-  isLoggedIn: boolean;
+  isLoginPage?: boolean;
 };
 
-function Header({ isLoggedIn }: HeaderProps): JSX.Element {
+function Header({ isLoginPage }: HeaderProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const { authorizationStatus, userData } = useAppSelector(
+    (state) => state.userReducer
+  );
+
+  const handleLogout: React.MouseEventHandler<HTMLAnchorElement> = () => {
+    dispatch(logout());
+  };
+
   return (
     <header className="header">
       <div className="container">
@@ -23,29 +35,46 @@ function Header({ isLoggedIn }: HeaderProps): JSX.Element {
               />
             </Link>
           </div>
-          {isLoggedIn ? (
+          {isLoginPage ? null : (
             <nav className="header__nav">
               <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a
-                    className="header__nav-link header__nav-link--profile"
-                    href="#"
-                  >
-                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    <span className="header__user-name user__name">
-                      Oliver.conner@gmail.com
-                    </span>
-                    <span className="header__favorite-count">3</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
+                {authorizationStatus ? (
+                  <>
+                    <li className="header__nav-item user">
+                      <Link
+                        className="header__nav-link header__nav-link--profile"
+                        to={APP_ROUTES.FAVORITES}
+                      >
+                        <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+                        <span className="header__user-name user__name">
+                          {userData?.name}
+                        </span>
+                        <span className="header__favorite-count">0</span>
+                      </Link>
+                    </li>
+                    <li className="header__nav-item">
+                      <a
+                        className="header__nav-link"
+                        onClick={handleLogout}
+                      >
+                        <span className="header__signout">Sign out</span>
+                      </a>
+                    </li>
+                  </>
+                ) : (
+                  <li className="header__nav-item user">
+                    <Link
+                      className="header__nav-link header__nav-link--profile"
+                      to={APP_ROUTES.LOGIN}
+                    >
+                      <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+                      <span className="header__login">Sign in</span>
+                    </Link>
+                  </li>
+                )}
               </ul>
             </nav>
-          ) : null}
+          )}
         </div>
       </div>
     </header>
