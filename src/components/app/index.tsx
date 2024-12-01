@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AuthorizedRoute from '@/components/authorized-route';
+import { APP_ROUTES } from '@/constants/routes';
 import Main from '@/pages/main';
 import Login from '@/pages/login';
 import Favorites from '@/pages/favorites';
@@ -12,13 +13,13 @@ function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/login" element={<Login />} />
+        <Route path={APP_ROUTES.MAIN} element={<Main />} />
+        <Route path={APP_ROUTES.LOGIN} element={<Login />} />
         <Route
-          path="/favorites"
+          path={APP_ROUTES.FAVORITES}
           element={<AuthorizedRoute element={<Favorites />} />}
         />
-        <Route path="/offer/:id" element={<Offer />} />
+        <Route path={APP_ROUTES.OFFER} element={<Offer />} />
         <Route path="/*" element={<Error404 />} />
       </Routes>
     </BrowserRouter>
