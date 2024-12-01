@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { api } from '@/api';
 import { offersReducer } from './offers/reducer';
+import { userReducer } from './user/reducer';
 
 const rootReducer = combineReducers({
   offersReducer,
+  userReducer,
 });
 
 export const store = configureStore({
