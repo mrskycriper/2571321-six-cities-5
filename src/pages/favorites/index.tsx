@@ -7,7 +7,7 @@ function Favorites(): JSX.Element {
   // TODO
   return (
     <div className="page">
-      <Header isLoggedIn />
+      <Header />
       <FavoritesList offers={[]} />
       <Footer />
     </div>
