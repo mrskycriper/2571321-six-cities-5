@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AuthorizedRoute from '@/components/authorized-route';
 import Main from '@/pages/main';
 import Login from '@/pages/login';
 import Favorites from '@/pages/favorites';
 import Offer from '@/pages/offer';
 import { Error404 } from '@/pages/errors';
-import AuthChecker from '@/components/auth-checker';
 import useAppInit from '@/hooks/use-app-init';
 
 function App(): JSX.Element {
@@ -16,7 +16,7 @@ function App(): JSX.Element {
         <Route path="/login" element={<Login />} />
         <Route
           path="/favorites"
-          element={<AuthChecker element={<Favorites />} isAuthorized />}
+          element={<AuthorizedRoute element={<Favorites />} />}
         />
         <Route path="/offer/:id" element={<Offer />} />
         <Route path="/*" element={<Error404 />} />
