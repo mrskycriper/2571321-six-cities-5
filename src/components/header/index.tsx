@@ -53,10 +53,7 @@ function Header({ isLoginPage }: HeaderProps): JSX.Element {
                       </Link>
                     </li>
                     <li className="header__nav-item">
-                      <a
-                        className="header__nav-link"
-                        onClick={handleLogout}
-                      >
+                      <a className="header__nav-link" onClick={handleLogout}>
                         <span className="header__signout">Sign out</span>
                       </a>
                     </li>

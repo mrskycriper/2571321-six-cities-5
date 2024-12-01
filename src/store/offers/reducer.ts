@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { cities } from '@/constants/cities';
+import { City } from '@/types/city';
+import { SortOrder } from '@/types/filter';
+import { OfferShort } from '@/types/offer';
 import {
   setCity,
   setCityOffers,
   setSortOrder,
   getGlobalOffers,
 } from './actions';
-import { OfferShort } from '@/types/offer';
-import { City } from '@/types/city';
-import { SortOrder } from '@/types/filter';
-import { cities } from '@/constants/cities';
 
 type OffersState = {
   globalOffers: OfferShort[];

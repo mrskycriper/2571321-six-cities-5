@@ -1,15 +1,16 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AuthorizedRoute from '@/components/authorized-route';
 import { APP_ROUTES } from '@/constants/routes';
+import useAppInit from '@/hooks/use-app-init';
 import Main from '@/pages/main';
 import Login from '@/pages/login';
 import Favorites from '@/pages/favorites';
 import Offer from '@/pages/offer';
 import { Error404 } from '@/pages/errors';
-import useAppInit from '@/hooks/use-app-init';
 
 function App(): JSX.Element {
   useAppInit();
+
   return (
     <BrowserRouter>
       <Routes>

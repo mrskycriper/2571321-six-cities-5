@@ -12,4 +12,4 @@ export type UserLong = UserShort & {
 export type AuthInfo = {
   email: string;
   password: string;
-}
+};

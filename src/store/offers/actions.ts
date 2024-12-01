@@ -45,12 +45,14 @@ export function applyCity(newCity: City): AppThunk {
 export function applySortOrder(newSortOrder: SortOrder): AppThunk {
   return function applySortOrderThunk(dispatch, getState) {
     const state = getState();
-    const newCityOffers = sortOffers(state.offersReducer.cityOffers, newSortOrder);
+    const newCityOffers = sortOffers(
+      state.offersReducer.cityOffers,
+      newSortOrder
+    );
     dispatch(setSortOrder(newSortOrder));
     dispatch(setCityOffers(newCityOffers));
   };
 }
-
 
 export function updateCityOffers(): AppThunk {
   return function updateCityOffersThunk(dispatch, getState) {
