@@ -4,8 +4,7 @@ import { AppThunk, AsyncThunkConfig } from '@/store/types';
 import { OfferShort } from '@/types/offer';
 import { City } from '@/types/city';
 import { SortOrder } from '@/types/filter';
-import filterOffers from '@/utils/filter-offers';
-import sortOffers from '@/utils/sort-offers';
+import { filterOffers, sortOffers } from '@/utils/offers';
 
 export const OffersActions = {
   SET_CITY: 'city/set',

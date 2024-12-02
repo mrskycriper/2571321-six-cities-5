@@ -6,7 +6,7 @@ import OffersList from '@/components/offers-list';
 import SortingFilter from '@/components/sorting-filter';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { Point } from '@/types/point';
-import offersToPoints from '@/utils/offers-to-points';
+import { offersToPoints } from '@/utils/offers';
 import Spinner from '@/components/spinner';
 import { updateCityOffers } from '@/store/offers/actions';
 

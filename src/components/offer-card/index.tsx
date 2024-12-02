@@ -4,7 +4,7 @@ import BookmarkButton from '@/components/bookmark-button';
 import Rating from '@/components/rating';
 import { OfferShort } from '@/types/offer';
 import { Point } from '@/types/point';
-import offersToPoints from '@/utils/offers-to-points';
+import { offerToPoint } from '@/utils/offers';
 
 type OfferCardProps = {
   offer: OfferShort;
@@ -17,7 +17,7 @@ function OfferCard({
   type,
   onOfferSelect,
 }: OfferCardProps): JSX.Element {
-  const offerPoint = offersToPoints([offer])[0];
+  const offerPoint = offerToPoint(offer);
 
   let cardClassName: string;
   let imageWrapperClassName: string;
