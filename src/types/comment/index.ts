@@ -1,9 +1,12 @@
 import { UserShort } from '@/types/user';
 
-export type Comment = {
+export type CommentShort = {
+  comment: string;
+  rating: number;
+}
+
+export type CommentLong = CommentShort & {
   id: string;
   date: string;
   user: UserShort;
-  comment: string;
-  rating: number;
 };

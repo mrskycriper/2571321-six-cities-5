@@ -1,8 +1,8 @@
-import { Comment } from '@/types/comment';
+import { CommentLong } from '@/types/comment';
 import Rating from '@/components/rating';
 
 type ReviewProps = {
-  comment: Comment;
+  comment: CommentLong;
 };
 
 function Review({ comment }: ReviewProps): JSX.Element {

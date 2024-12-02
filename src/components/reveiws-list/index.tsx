@@ -1,8 +1,8 @@
 import Review from '@/components/reveiw';
-import { Comment } from '@/types/comment';
+import { CommentLong } from '@/types/comment';
 
 type ReviewsListProps = {
-  comments: Comment[];
+  comments: CommentLong[];
 };
 
 function ReviewsList({ comments }: ReviewsListProps): JSX.Element {
