@@ -5,6 +5,7 @@ import Rating from '@/components/rating';
 import { OfferShort } from '@/types/offer';
 import { Point } from '@/types/point';
 import { offerToPoint } from '@/utils/offers';
+import { APP_ROUTES } from '@/constants/routes';
 
 type OfferCardProps = {
   offer: OfferShort;
@@ -62,7 +63,7 @@ function OfferCard({
           'place-card__image-wrapper'
         )}
       >
-        <Link to={`/offer/${offer.id}`}>
+        <Link to={APP_ROUTES.OFFER(offer.id)}>
           <img
             className="place-card__image"
             src={offer.previewImage}
@@ -86,7 +87,7 @@ function OfferCard({
           starsClassName={'place-card__stars'}
         />
         <h2 className="place-card__name">
-          <Link to={`/offer/${offer.id}`}>{offer.title}</Link>
+          <Link to={APP_ROUTES.OFFER(offer.id)}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

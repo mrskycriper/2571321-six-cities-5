@@ -20,7 +20,7 @@ function App(): JSX.Element {
           path={APP_ROUTES.FAVORITES}
           element={<AuthorizedRoute element={<Favorites />} />}
         />
-        <Route path={APP_ROUTES.OFFER} element={<Offer />} />
+        <Route path={APP_ROUTES.OFFER(':id')} element={<Offer />} />
         <Route path="/*" element={<Error404 />} />
       </Routes>
     </BrowserRouter>
