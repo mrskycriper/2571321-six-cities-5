@@ -2,5 +2,5 @@ export const APP_ROUTES = {
   MAIN: '/',
   LOGIN: '/login',
   FAVORITES: 'favorites',
-  OFFER: '/offer/:id',
+  OFFER: (offerId: string) => `/offer/${offerId}`,
 };
