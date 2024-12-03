@@ -25,6 +25,7 @@ function OfferCard({
   let imageWidth: string;
   let imageHeight: string;
 
+  // TODO вынести в константы
   switch (type) {
     case 'Main':
       cardClassName = 'cities__card';
