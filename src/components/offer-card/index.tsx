@@ -2,14 +2,15 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import BookmarkButton from '@/components/bookmark-button';
 import Rating from '@/components/rating';
-import { OfferShort } from '@/types/offer';
+import { OfferShort, OfferCardType } from '@/types/offer';
 import { Point } from '@/types/point';
 import { offerToPoint } from '@/utils/offers';
 import { APP_ROUTES } from '@/constants/routes';
+import { offerCardStyles } from './constants';
 
 type OfferCardProps = {
   offer: OfferShort;
-  type: 'Main' | 'Favorites' | 'Nearby';
+  type: OfferCardType;
   onOfferSelect?: (point: Point | undefined) => void;
 };
 
@@ -19,37 +20,11 @@ function OfferCard({
   onOfferSelect,
 }: OfferCardProps): JSX.Element {
   const offerPoint = offerToPoint(offer);
-
-  let cardClassName: string;
-  let imageWrapperClassName: string;
-  let imageWidth: string;
-  let imageHeight: string;
-
-  // TODO вынести в константы
-  switch (type) {
-    case 'Main':
-      cardClassName = 'cities__card';
-      imageWrapperClassName = 'cities__image-wrapper';
-      imageWidth = '260';
-      imageHeight = '200';
-      break;
-    case 'Favorites':
-      cardClassName = 'favorites__card';
-      imageWrapperClassName = 'favorites__image-wrapper';
-      imageWidth = '150';
-      imageHeight = '110';
-      break;
-    case 'Nearby':
-      cardClassName = 'near-places__card';
-      imageWrapperClassName = 'near-places__image-wrapper';
-      imageWidth = '260';
-      imageHeight = '200';
-      break;
-  }
+  const cardStyle = offerCardStyles[type];
 
   return (
     <article
-      className={classNames(cardClassName, 'place-card')}
+      className={classNames(cardStyle.cardClassName, 'place-card')}
       onMouseOver={onOfferSelect ? () => onOfferSelect(offerPoint) : undefined}
       onMouseLeave={onOfferSelect ? () => onOfferSelect(undefined) : undefined}
     >
@@ -60,7 +35,7 @@ function OfferCard({
       ) : null}
       <div
         className={classNames(
-          imageWrapperClassName,
+          cardStyle.imageWrapperClassName,
           'place-card__image-wrapper'
         )}
       >
@@ -68,8 +43,8 @@ function OfferCard({
           <img
             className="place-card__image"
             src={offer.previewImage}
-            width={imageWidth}
-            height={imageHeight}
+            width={cardStyle.imageWidth}
+            height={cardStyle.imageHeight}
             alt="Place image"
           />
         </Link>
@@ -80,7 +55,7 @@ function OfferCard({
             <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <BookmarkButton marked={type === 'Favorites'} />
+          <BookmarkButton marked={type === 'favorites'} />
         </div>
         <Rating
           value={offer.rating}

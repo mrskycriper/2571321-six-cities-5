@@ -44,7 +44,7 @@ function FavoritesList({
                     <OfferCard
                       offer={offer}
                       key={offer.id}
-                      type={'Favorites'}
+                      type='favorites'
                     />
                   ))}
                 </div>

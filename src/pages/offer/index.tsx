@@ -158,7 +158,7 @@ function Offer(): JSX.Element {
             <h2 className="near-places__title">
               Other places in the neighbourhood
             </h2>
-            <OffersList offers={nearbyOffers} type="Nearby" />
+            <OffersList offers={nearbyOffers} type="nearby" />
           </section>
         </div>
       </main>

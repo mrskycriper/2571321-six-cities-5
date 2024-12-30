@@ -45,7 +45,7 @@ function Main(): JSX.Element {
                 <SortingFilter />
                 <OffersList
                   offers={cityOffers}
-                  type="Main"
+                  type="main"
                   onOfferSelect={handleOfferSelect}
                 />
               </section>
