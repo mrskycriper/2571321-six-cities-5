@@ -1,15 +1,13 @@
 import { useMemo } from 'react';
-import { OfferShort } from '@/types/offer';
 import OfferCard from '@/components/offer-card';
 import { CityName } from '@/types/city';
+import { OfferShort } from '@/types/offer';
 
-type FavoritesListProps = {
+type FavoriteOffersProps = {
   offers: OfferShort[];
 };
 
-function FavoritesList({
-  offers,
-}: FavoritesListProps): JSX.Element {
+function FavoriteOffers({ offers }: FavoriteOffersProps): JSX.Element {
   const cityOffersMap = useMemo(() => {
     const map: Partial<Record<CityName, OfferShort[]>> = {};
 
@@ -41,11 +39,7 @@ function FavoritesList({
                 </div>
                 <div className="favorites__places">
                   {mappedOffers.map((offer) => (
-                    <OfferCard
-                      offer={offer}
-                      key={offer.id}
-                      type={'Favorites'}
-                    />
+                    <OfferCard offer={offer} key={offer.id} type="favorites" />
                   ))}
                 </div>
               </li>
@@ -57,4 +51,4 @@ function FavoritesList({
   );
 }
 
-export default FavoritesList;
+export default FavoriteOffers;

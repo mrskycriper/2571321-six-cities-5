@@ -1,6 +1,6 @@
 import { City, CityName } from '@/types/city';
 
-export const cities: Record<CityName, City> = {
+export const CITIES: Record<CityName, City> = {
   Paris: {
     name: 'Paris',
     location: {

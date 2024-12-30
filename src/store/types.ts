@@ -1,6 +1,6 @@
+import { AxiosInstance } from 'axios';
 import { Action } from 'redux';
 import { ThunkAction } from '@reduxjs/toolkit';
-import { AxiosInstance } from 'axios';
 import { APIErrorResponse } from '@/api';
 import { store } from '.';
 

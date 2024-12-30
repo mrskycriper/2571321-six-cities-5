@@ -2,56 +2,41 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import BookmarkButton from '@/components/bookmark-button';
 import Rating from '@/components/rating';
-import { OfferShort } from '@/types/offer';
-import { Point } from '@/types/point';
-import { offerToPoint } from '@/utils/offers';
 import { APP_ROUTES } from '@/constants/routes';
+import { setActivePoint } from '@/store/actions';
+import { useAppDispatch } from '@/store/hooks';
+import { OfferShort, OfferCardType } from '@/types/offer';
+import { offerToPoint } from '@/utils/offers';
+import { OFFER_CARD_STYLES } from './constants';
 
 type OfferCardProps = {
   offer: OfferShort;
-  type: 'Main' | 'Favorites' | 'Nearby';
-  onOfferSelect?: (point: Point | undefined) => void;
+  type: OfferCardType;
+  mapPointHighlight?: boolean;
 };
 
 function OfferCard({
   offer,
   type,
-  onOfferSelect,
+  mapPointHighlight,
 }: OfferCardProps): JSX.Element {
+  const dispatch = useAppDispatch();
   const offerPoint = offerToPoint(offer);
-
-  let cardClassName: string;
-  let imageWrapperClassName: string;
-  let imageWidth: string;
-  let imageHeight: string;
-
-  // TODO вынести в константы
-  switch (type) {
-    case 'Main':
-      cardClassName = 'cities__card';
-      imageWrapperClassName = 'cities__image-wrapper';
-      imageWidth = '260';
-      imageHeight = '200';
-      break;
-    case 'Favorites':
-      cardClassName = 'favorites__card';
-      imageWrapperClassName = 'favorites__image-wrapper';
-      imageWidth = '150';
-      imageHeight = '110';
-      break;
-    case 'Nearby':
-      cardClassName = 'near-places__card';
-      imageWrapperClassName = 'near-places__image-wrapper';
-      imageWidth = '260';
-      imageHeight = '200';
-      break;
-  }
+  const cardStyle = OFFER_CARD_STYLES[type];
 
   return (
     <article
-      className={classNames(cardClassName, 'place-card')}
-      onMouseOver={onOfferSelect ? () => onOfferSelect(offerPoint) : undefined}
-      onMouseLeave={onOfferSelect ? () => onOfferSelect(undefined) : undefined}
+      className={classNames(cardStyle.cardClassName, 'place-card')}
+      onMouseOver={
+        mapPointHighlight
+          ? () => dispatch(setActivePoint(offerPoint))
+          : undefined
+      }
+      onMouseLeave={
+        mapPointHighlight
+          ? () => dispatch(setActivePoint(undefined))
+          : undefined
+      }
     >
       {offer.isPremium ? (
         <div className="place-card__mark">
@@ -60,7 +45,7 @@ function OfferCard({
       ) : null}
       <div
         className={classNames(
-          imageWrapperClassName,
+          cardStyle.imageWrapperClassName,
           'place-card__image-wrapper'
         )}
       >
@@ -68,8 +53,8 @@ function OfferCard({
           <img
             className="place-card__image"
             src={offer.previewImage}
-            width={imageWidth}
-            height={imageHeight}
+            width={cardStyle.imageWidth}
+            height={cardStyle.imageHeight}
             alt="Place image"
           />
         </Link>
@@ -80,7 +65,7 @@ function OfferCard({
             <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <BookmarkButton marked={type === 'Favorites'} />
+          <BookmarkButton marked={type === 'favorites'} />
         </div>
         <Rating
           value={offer.rating}
@@ -90,7 +75,9 @@ function OfferCard({
         <h2 className="place-card__name">
           <Link to={APP_ROUTES.OFFER(offer.id)}>{offer.title}</Link>
         </h2>
-        <p className="place-card__type">{offer.type.charAt(0).toUpperCase() + offer.type.slice(1)}</p>
+        <p className="place-card__type">
+          {offer.type.charAt(0).toUpperCase() + offer.type.slice(1)}
+        </p>
       </div>
     </article>
   );

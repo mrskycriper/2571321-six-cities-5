@@ -27,3 +27,14 @@ export type OfferLong = OfferBase & {
   images: string[];
   maxAdults: number;
 };
+
+export type OfferListType = 'main' | 'nearby';
+
+export type OfferCardType = OfferListType | 'favorites';
+
+export type OfferCardStyle = {
+  cardClassName: string;
+  imageWrapperClassName: string;
+  imageWidth: string;
+  imageHeight: string;
+};

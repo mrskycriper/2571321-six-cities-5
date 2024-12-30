@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useAppDispatch } from '@/store/hooks';
 import { postComment } from '@/store/actions';
+import { useAppDispatch } from '@/store/hooks';
 
 type CommentFormProps = {
   offerId: string;

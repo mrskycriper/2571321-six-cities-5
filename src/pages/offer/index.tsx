@@ -3,22 +3,21 @@ import { useParams } from 'react-router-dom';
 import CommentForm from '@/components/comment-form';
 import Header from '@/components/header';
 import Map from '@/components/map';
-import OffersList from '@/components/offers-list';
+import NearbyOffers from '@/components/nearby-offers';
 import Rating from '@/components/rating';
 import ReviewsList from '@/components/reveiws-list';
+import Spinner from '@/components/spinner';
 import { Error404 } from '@/pages/errors';
 import { fetchOffer } from '@/store/actions';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { offerToPoint, offersToPoints } from '@/utils/offers';
-import Spinner from '@/components/spinner';
 
 function Offer(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const { authorizationStatus } = useAppSelector((state) => state.userReducer);
-  const { offer, comments, nearbyOffers, offerLoading, offerError } = useAppSelector(
-    (state) => state.offerReducer
-  );
+  const authorizationStatus = useAppSelector((state) => state.userReducer.authorizationStatus);
+  const { offer, comments, nearbyOffers, offerLoading, offerError } =
+    useAppSelector((state) => state.offerReducer);
 
   useEffect(() => {
     if (id) {
@@ -143,14 +142,14 @@ function Offer(): JSX.Element {
                   <span className="reviews__amount">{comments.length}</span>
                 </h2>
                 <ReviewsList comments={comments} />
-                {authorizationStatus ? <CommentForm offerId={id!}/> : null}
+                {authorizationStatus ? <CommentForm offerId={id!} /> : null}
               </section>
             </div>
           </div>
           <Map
             city={offer.city}
             points={activePoint ? [activePoint, ...nearbyPoints] : []}
-            selectedPoint={activePoint}
+            fixedSelectedPoint={activePoint}
           />
         </section>
         <div className="container">
@@ -158,7 +157,7 @@ function Offer(): JSX.Element {
             <h2 className="near-places__title">
               Other places in the neighbourhood
             </h2>
-            <OffersList offers={nearbyOffers} type="Nearby" />
+            <NearbyOffers offers={nearbyOffers} />
           </section>
         </div>
       </main>
