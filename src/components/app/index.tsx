@@ -11,10 +11,10 @@ import { Error404 } from '@/pages/errors';
 import { useAppSelector } from '@/store/hooks';
 
 function App(): JSX.Element {
-  const { globalOffersLoading } = useAppSelector(
-    (state) => state.offersReducer
+  const globalOffersLoading = useAppSelector(
+    (state) => state.offersReducer.globalOffersLoading
   );
-  const { userLoading } = useAppSelector((state) => state.userReducer);
+  const userLoading = useAppSelector((state) => state.userReducer.userLoading);
   useAppInit();
 
   if (globalOffersLoading || userLoading) {

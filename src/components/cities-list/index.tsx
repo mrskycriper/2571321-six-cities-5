@@ -5,7 +5,7 @@ import { City } from '@/types/city';
 
 function CitiesList(): JSX.Element {
   const dispatch = useAppDispatch();
-  const { city } = useAppSelector((state) => state.offersReducer);
+  const city = useAppSelector((state) => state.offersReducer.city);
   const handleCityChange = (newCity: City) => {
     dispatch(applyCity(newCity));
   };

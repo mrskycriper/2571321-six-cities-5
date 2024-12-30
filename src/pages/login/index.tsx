@@ -9,7 +9,7 @@ import { validatePassword } from '@/utils/user';
 function Login(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { authorizationStatus } = useAppSelector((state) => state.userReducer);
+  const authorizationStatus = useAppSelector((state) => state.userReducer.authorizationStatus);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [submitDisabled, setSubmitDisabled] = useState(true);

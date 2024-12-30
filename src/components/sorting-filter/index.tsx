@@ -6,7 +6,7 @@ import { sortFilters } from './constants';
 
 function SortingFilter(): JSX.Element {
   const dispatch = useAppDispatch();
-  const { sortOrder } = useAppSelector((state) => state.offersReducer);
+  const sortOrder = useAppSelector((state) => state.offersReducer.sortOrder);
   const handleFilterChange = (newSortOrder: SortOrder) => {
     dispatch(applySortOrder(newSortOrder));
   };

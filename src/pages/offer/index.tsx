@@ -15,7 +15,7 @@ import { offerToPoint, offersToPoints } from '@/utils/offers';
 function Offer(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const { authorizationStatus } = useAppSelector((state) => state.userReducer);
+  const authorizationStatus = useAppSelector((state) => state.userReducer.authorizationStatus);
   const { offer, comments, nearbyOffers, offerLoading, offerError } =
     useAppSelector((state) => state.offerReducer);
 
