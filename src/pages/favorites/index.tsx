@@ -1,6 +1,6 @@
 import Header from '@/components/header';
 import Footer from '@/components/footer';
-import FavoritesList from '@/components/favorites-list';
+import FavoriteOffers from '@/components/favorite-offers';
 // import { OfferShort } from '@/types/offer';
 
 function Favorites(): JSX.Element {
@@ -8,7 +8,7 @@ function Favorites(): JSX.Element {
   return (
     <div className="page">
       <Header />
-      <FavoritesList offers={[]} />
+      <FavoriteOffers offers={[]} />
       <Footer />
     </div>
   );
