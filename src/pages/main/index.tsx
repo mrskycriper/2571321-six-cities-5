@@ -12,15 +12,20 @@ import { updateCityOffers } from '@/store/offers/actions';
 
 function Main(): JSX.Element {
   const dispatch = useAppDispatch();
-  const { loading, city, cityOffers } = useAppSelector(
-    (state) => state.offersReducer
-  );
+  const { globalOffersLoading, cityOffersLoading, city, cityOffers } =
+    useAppSelector((state) => state.offersReducer);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!loading) {
-      dispatch(updateCityOffers());
+    if (!globalOffersLoading) {
+      if (cityOffersLoading === 'idle') {
+        dispatch(updateCityOffers());
+      }
+      if (cityOffersLoading === 'done') {
+        setLoading(false);
+      }
     }
-  }, [loading, dispatch]);
+  }, [globalOffersLoading, cityOffersLoading, dispatch]);
 
   const mapPoints = useMemo(() => offersToPoints(cityOffers), [cityOffers]);
   const [activePoint, setActivePoint] = useState<Point | undefined>(undefined);

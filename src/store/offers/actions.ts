@@ -1,20 +1,24 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { API_ROUTES, errorHandler } from '@/api';
+import { API_ROUTES, APIErrorResponse, errorHandler } from '@/api';
 import { AppThunk, AsyncThunkConfig } from '@/store/types';
 import { OfferShort } from '@/types/offer';
 import { City } from '@/types/city';
 import { SortOrder } from '@/types/filter';
 import { filterOffers, sortOffers } from '@/utils/offers';
+import { CityOffersLoading } from '@/types/loading';
 
 export const OffersActions = {
   SET_CITY: 'city/set',
   SET_SORT_ORDER: 'sortOrder/set',
   SET_CITY_OFFERS: 'cityOffers/set',
   SET_GLOBAL_OFFERS: 'globalOffers/set',
+  SET_GLOBAL_OFFERS_LOADING: 'globalOffersLoading/set',
+  SET_GLOBAL_OFFERS_ERROR: 'globalOffersError/set',
   APPLY_CITY: 'city/apply',
   APPLY_SORT_ORDER: 'sortOrder/apply',
   UPDATE_CITY_OFFERS: 'cityOffers/update',
   FETCH_GLOBAL_OFFERS: 'globalOffers/fetch',
+  SET_CITY_OFFERS_LOADING: 'cityOffersLoading/set',
 };
 
 export const setCity = createAction<City>(OffersActions.SET_CITY);
@@ -27,8 +31,20 @@ export const setSortOrder = createAction<SortOrder>(
   OffersActions.SET_SORT_ORDER
 );
 
-export const setGlobalOffers = createAction<SortOrder>(
+export const setGlobalOffers = createAction<OfferShort[]>(
   OffersActions.SET_GLOBAL_OFFERS
+);
+
+export const setGlobalOffersLoading = createAction<boolean>(
+  OffersActions.SET_GLOBAL_OFFERS_LOADING
+);
+
+export const setGlobalOffersError = createAction<APIErrorResponse | null>(
+  OffersActions.SET_GLOBAL_OFFERS_ERROR
+);
+
+export const setCityOffersLoading = createAction<CityOffersLoading>(
+  OffersActions.SET_CITY_OFFERS_LOADING
 );
 
 export function applyCity(newCity: City): AppThunk {
@@ -55,6 +71,7 @@ export function applySortOrder(newSortOrder: SortOrder): AppThunk {
 
 export function updateCityOffers(): AppThunk {
   return function updateCityOffersThunk(dispatch, getState) {
+    dispatch(setCityOffersLoading('loading'));
     const state = getState();
     let newCityOffers = filterOffers(
       state.offersReducer.globalOffers,
@@ -62,20 +79,22 @@ export function updateCityOffers(): AppThunk {
     );
     newCityOffers = sortOffers(newCityOffers, state.offersReducer.sortOrder);
     dispatch(setCityOffers(newCityOffers));
+    dispatch(setCityOffersLoading('done'));
   };
 }
 
-export const getGlobalOffers = createAsyncThunk<
-  OfferShort[],
-  void,
-  AsyncThunkConfig
->(OffersActions.FETCH_GLOBAL_OFFERS, async (_, thunkApi) => {
-  try {
-    const response = await thunkApi.extra.api.get<OfferShort[]>(
-      API_ROUTES.OFFERS.GET_GLOBAL
-    );
-    return response.data;
-  } catch (error) {
-    return thunkApi.rejectWithValue(errorHandler(error));
+export const fetchGlobalOffers = createAsyncThunk<void, void, AsyncThunkConfig>(
+  OffersActions.FETCH_GLOBAL_OFFERS,
+  async (_, thunkApi) => {
+    try {
+      thunkApi.dispatch(setGlobalOffersLoading(true));
+      const { data: globalOffers } = await thunkApi.extra.api.get<OfferShort[]>(
+        API_ROUTES.OFFERS.GET_GLOBAL
+      );
+      thunkApi.dispatch(setGlobalOffers(globalOffers));
+      thunkApi.dispatch(setGlobalOffersLoading(false));
+    } catch (error) {
+      thunkApi.dispatch(setGlobalOffersError(errorHandler(error)));
+    }
   }
-});
+);

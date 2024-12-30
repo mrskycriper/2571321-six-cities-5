@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AuthorizedRoute from '@/components/authorized-route';
+import Spinner from '@/components/spinner';
 import { APP_ROUTES } from '@/constants/routes';
 import useAppInit from '@/hooks/use-app-init';
 import Main from '@/pages/main';
@@ -7,9 +8,18 @@ import Login from '@/pages/login';
 import Favorites from '@/pages/favorites';
 import Offer from '@/pages/offer';
 import { Error404 } from '@/pages/errors';
+import { useAppSelector } from '@/store/hooks';
 
 function App(): JSX.Element {
+  const { globalOffersLoading } = useAppSelector(
+    (state) => state.offersReducer
+  );
+  const { userLoading } = useAppSelector((state) => state.userReducer);
   useAppInit();
+
+  if (globalOffersLoading || userLoading) {
+    return <Spinner variant="page" />;
+  }
 
   return (
     <BrowserRouter>

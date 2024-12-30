@@ -1,15 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { UserLong } from '@/types/user';
-import { setAuthorizationStatus, setUserData } from './actions';
+import { setAuthorizationStatus, setUserData, setUserLoading } from './actions';
 
 type UserState = {
   authorizationStatus: boolean;
   userData: UserLong | null;
+  userLoading: boolean;
 };
 
 const initialState: UserState = {
   authorizationStatus: false,
   userData: null,
+  userLoading: true,
 };
 
 const userSlice = createSlice({
@@ -23,6 +25,9 @@ const userSlice = createSlice({
       })
       .addCase(setUserData, (state, action) => {
         state.userData = action.payload;
+      })
+      .addCase(setUserLoading, (state, action) => {
+        state.userLoading = action.payload;
       });
   },
 });
