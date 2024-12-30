@@ -3,30 +3,40 @@ import { Link } from 'react-router-dom';
 import BookmarkButton from '@/components/bookmark-button';
 import Rating from '@/components/rating';
 import { APP_ROUTES } from '@/constants/routes';
+import { setActivePoint } from '@/store/actions';
+import { useAppDispatch } from '@/store/hooks';
 import { OfferShort, OfferCardType } from '@/types/offer';
-import { Point } from '@/types/point';
 import { offerToPoint } from '@/utils/offers';
 import { OFFER_CARD_STYLES } from './constants';
 
 type OfferCardProps = {
   offer: OfferShort;
   type: OfferCardType;
-  onOfferSelect?: (point: Point | undefined) => void;
+  mapPointHighlight?: boolean;
 };
 
 function OfferCard({
   offer,
   type,
-  onOfferSelect,
+  mapPointHighlight,
 }: OfferCardProps): JSX.Element {
+  const dispatch = useAppDispatch();
   const offerPoint = offerToPoint(offer);
   const cardStyle = OFFER_CARD_STYLES[type];
 
   return (
     <article
       className={classNames(cardStyle.cardClassName, 'place-card')}
-      onMouseOver={onOfferSelect ? () => onOfferSelect(offerPoint) : undefined}
-      onMouseLeave={onOfferSelect ? () => onOfferSelect(undefined) : undefined}
+      onMouseOver={
+        mapPointHighlight
+          ? () => dispatch(setActivePoint(offerPoint))
+          : undefined
+      }
+      onMouseLeave={
+        mapPointHighlight
+          ? () => dispatch(setActivePoint(undefined))
+          : undefined
+      }
     >
       {offer.isPremium ? (
         <div className="place-card__mark">

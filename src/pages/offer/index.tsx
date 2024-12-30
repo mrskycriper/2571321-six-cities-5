@@ -149,7 +149,7 @@ function Offer(): JSX.Element {
           <Map
             city={offer.city}
             points={activePoint ? [activePoint, ...nearbyPoints] : []}
-            selectedPoint={activePoint}
+            fixedSelectedPoint={activePoint}
           />
         </section>
         <div className="container">
