@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import CommentForm from '@/components/comment-form';
 import Header from '@/components/header';
 import Map from '@/components/map';
-import OffersList from '@/components/offers-list';
+import NearbyOffers from '@/components/nearby-offers';
 import Rating from '@/components/rating';
 import ReviewsList from '@/components/reveiws-list';
 import Spinner from '@/components/spinner';
@@ -157,7 +157,7 @@ function Offer(): JSX.Element {
             <h2 className="near-places__title">
               Other places in the neighbourhood
             </h2>
-            <OffersList offers={nearbyOffers} type="nearby" />
+            <NearbyOffers offers={nearbyOffers} />
           </section>
         </div>
       </main>
