@@ -3,6 +3,7 @@ import { APIErrorResponse } from '@/api';
 import { CITIES } from '@/constants/cities';
 import { City } from '@/types/city';
 import { SortOrder } from '@/types/filter';
+import { CityOffersLoading } from '@/types/loading';
 import { OfferShort } from '@/types/offer';
 import {
   setCity,
@@ -13,7 +14,6 @@ import {
   setGlobalOffersError,
   setCityOffersLoading,
 } from './actions';
-import { CityOffersLoading } from '@/types/loading';
 
 type OffersState = {
   globalOffers: OfferShort[];
