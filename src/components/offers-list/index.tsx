@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import OfferCard from '@/components/offer-card';
 import { OfferListType, OfferShort } from '@/types/offer';
 import { Point } from '@/types/point';
-import { offerListStyles } from './constants';
+import { OFFER_LIST_STYLES } from './constants';
 
 type OffersListProps = {
   offers: OfferShort[];
@@ -15,7 +15,7 @@ function OffersList({
   type,
   onOfferSelect,
 }: OffersListProps): JSX.Element {
-  const containerClassName = offerListStyles[type];
+  const containerClassName = OFFER_LIST_STYLES[type];
 
   return (
     <div className={classNames(containerClassName, 'places__list')}>

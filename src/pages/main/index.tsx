@@ -4,11 +4,11 @@ import Header from '@/components/header';
 import Map from '@/components/map';
 import OffersList from '@/components/offers-list';
 import SortingFilter from '@/components/sorting-filter';
+import Spinner from '@/components/spinner';
+import { updateCityOffers } from '@/store/actions';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { Point } from '@/types/point';
 import { offersToPoints } from '@/utils/offers';
-import Spinner from '@/components/spinner';
-import { updateCityOffers } from '@/store/offers/actions';
 
 function Main(): JSX.Element {
   const dispatch = useAppDispatch();

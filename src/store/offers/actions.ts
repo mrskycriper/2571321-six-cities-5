@@ -1,11 +1,11 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { API_ROUTES, APIErrorResponse, errorHandler } from '@/api';
 import { AppThunk, AsyncThunkConfig } from '@/store/types';
-import { OfferShort } from '@/types/offer';
 import { City } from '@/types/city';
 import { SortOrder } from '@/types/filter';
-import { filterOffers, sortOffers } from '@/utils/offers';
 import { CityOffersLoading } from '@/types/loading';
+import { OfferShort } from '@/types/offer';
+import { filterOffers, sortOffers } from '@/utils/offers';
 
 export const OffersActions = {
   SET_CITY: 'city/set',

@@ -1,5 +1,4 @@
-
-
+export { fetchOffer, postComment } from './offer/actions';
 export {
   applyCity,
   applySortOrder,
@@ -7,4 +6,3 @@ export {
   fetchGlobalOffers,
 } from './offers/actions';
 export { validateUser, login, logout } from './user/actions';
-export { fetchOffer, postComment } from './offer/actions';

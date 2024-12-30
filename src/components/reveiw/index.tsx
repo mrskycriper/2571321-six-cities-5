@@ -1,5 +1,5 @@
-import { CommentLong } from '@/types/comment';
 import Rating from '@/components/rating';
+import { CommentLong } from '@/types/comment';
 
 type ReviewProps = {
   comment: CommentLong;

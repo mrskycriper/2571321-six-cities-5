@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { APIErrorResponse } from '@/api';
-import { cities } from '@/constants/cities';
+import { CITIES } from '@/constants/cities';
 import { City } from '@/types/city';
 import { SortOrder } from '@/types/filter';
 import { OfferShort } from '@/types/offer';
@@ -31,7 +31,7 @@ const initialState: OffersState = {
   globalOffersError: null,
   cityOffers: [],
   cityOffersLoading: 'idle',
-  city: cities.Paris,
+  city: CITIES.Paris,
   sortOrder: SortOrder.POPULAR,
 };
 

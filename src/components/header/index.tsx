@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { APP_ROUTES } from '@/constants/routes';
 import { logout } from '@/store/actions';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 
 type HeaderProps = {
   isLoginPage?: boolean;

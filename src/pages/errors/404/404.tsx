@@ -4,9 +4,9 @@ import styles from './styles.module.css';
 
 type Error404Props = {
   description?: string;
-}
+};
 
-function Error404({description}: Error404Props): JSX.Element {
+function Error404({ description }: Error404Props): JSX.Element {
   return (
     <div className={`page ${styles.errorPage}`}>
       <div className={styles.errorBlock}>

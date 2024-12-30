@@ -1,13 +1,13 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { api } from '@/api';
+import { offerReducer } from './offer/reducer';
 import { offersReducer } from './offers/reducer';
 import { userReducer } from './user/reducer';
-import { offerReducer } from './offer/reducer';
 
 const rootReducer = combineReducers({
+  offerReducer,
   offersReducer,
   userReducer,
-  offerReducer,
 });
 
 export const store = configureStore({

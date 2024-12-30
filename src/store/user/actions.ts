@@ -1,7 +1,7 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { API_ROUTES } from '@/api';
-import { AuthInfo, UserLong } from '@/types/user';
 import { AsyncThunkConfig } from '@/store/types';
+import { AuthInfo, UserLong } from '@/types/user';
 import { clearToken, setToken } from '@/utils/user';
 
 export const userActions = {

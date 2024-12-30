@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useAppDispatch } from '@/store/hooks';
 import { fetchGlobalOffers, validateUser } from '@/store/actions';
+import { useAppDispatch } from '@/store/hooks';
 
 function useAppInit() {
   const dispatch = useAppDispatch();

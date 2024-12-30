@@ -1,6 +1,6 @@
 import { OfferCardType, OfferCardStyle } from '@/types/offer';
 
-export const offerCardStyles: Record<OfferCardType, OfferCardStyle> = {
+export const OFFER_CARD_STYLES: Record<OfferCardType, OfferCardStyle> = {
   main: {
     cardClassName: 'cities__card',
     imageWrapperClassName: 'cities__image-wrapper',

@@ -25,7 +25,9 @@ export const setNearbyOffers = createAction<OfferShort[]>(
   OfferActions.SET_NEARBY_OFFERS
 );
 
-export const setOfferLoading = createAction<boolean>(OfferActions.SET_OFFER_LOADING);
+export const setOfferLoading = createAction<boolean>(
+  OfferActions.SET_OFFER_LOADING
+);
 
 export const setOfferError = createAction<APIErrorResponse | null>(
   OfferActions.SET_OFFER_ERROR

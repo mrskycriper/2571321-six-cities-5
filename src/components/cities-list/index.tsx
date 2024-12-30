@@ -1,6 +1,6 @@
+import { CITIES } from '@/constants/cities';
 import { applyCity } from '@/store/actions';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { cities } from '@/constants/cities';
 import { City } from '@/types/city';
 
 function CitiesList(): JSX.Element {
@@ -14,7 +14,7 @@ function CitiesList(): JSX.Element {
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {Object.entries(cities).map(([cityName, cityObject]) => (
+          {Object.entries(CITIES).map(([cityName, cityObject]) => (
             <li className="locations__item" key={cityName}>
               <a
                 className={`locations__item-link tabs__item ${

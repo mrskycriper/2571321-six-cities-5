@@ -2,11 +2,11 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import BookmarkButton from '@/components/bookmark-button';
 import Rating from '@/components/rating';
+import { APP_ROUTES } from '@/constants/routes';
 import { OfferShort, OfferCardType } from '@/types/offer';
 import { Point } from '@/types/point';
 import { offerToPoint } from '@/utils/offers';
-import { APP_ROUTES } from '@/constants/routes';
-import { offerCardStyles } from './constants';
+import { OFFER_CARD_STYLES } from './constants';
 
 type OfferCardProps = {
   offer: OfferShort;
@@ -20,7 +20,7 @@ function OfferCard({
   onOfferSelect,
 }: OfferCardProps): JSX.Element {
   const offerPoint = offerToPoint(offer);
-  const cardStyle = offerCardStyles[type];
+  const cardStyle = OFFER_CARD_STYLES[type];
 
   return (
     <article
@@ -65,7 +65,9 @@ function OfferCard({
         <h2 className="place-card__name">
           <Link to={APP_ROUTES.OFFER(offer.id)}>{offer.title}</Link>
         </h2>
-        <p className="place-card__type">{offer.type.charAt(0).toUpperCase() + offer.type.slice(1)}</p>
+        <p className="place-card__type">
+          {offer.type.charAt(0).toUpperCase() + offer.type.slice(1)}
+        </p>
       </div>
     </article>
   );
