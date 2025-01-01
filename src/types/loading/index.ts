@@ -1,3 +1,1 @@
-export type CityOffersLoading = 'idle' | 'loading' | 'done';
-
-export type GlobalOffersLoading = 'idle' | 'loading' | 'done';
+export type LoadingState = 'idle' | 'loading' | 'done';

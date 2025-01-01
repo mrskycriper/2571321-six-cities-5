@@ -12,7 +12,7 @@ import { useAppSelector } from '@/store/hooks';
 
 function App(): JSX.Element {
   const globalOffersLoading = useAppSelector(
-    (state) => state.offersReducer.globalOffersLoading
+    (state) => state.globalOffersReducer.loading
   );
   const userLoading = useAppSelector((state) => state.userReducer.userLoading);
   useAppInit();

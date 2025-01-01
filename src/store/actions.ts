@@ -1,9 +1,9 @@
-export { setActivePoint } from './map/actions';
-export { fetchOffer, postComment } from './offer/actions';
 export {
-  applyCity,
-  applySortOrder,
+  changeCity,
+  changeSortOrder,
   updateCityOffers,
-  fetchGlobalOffers,
-} from './offers/actions';
+  setActivePoint,
+} from './city-offers/actions';
+export { fetchGlobalOffers } from './global-offers/actions';
+export { fetchOffer, postComment } from './offer/actions';
 export { validateUser, login, logout } from './user/actions';
