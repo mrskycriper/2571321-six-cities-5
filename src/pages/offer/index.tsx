@@ -8,7 +8,7 @@ import Rating from '@/components/rating';
 import ReviewsList from '@/components/reveiws-list';
 import Spinner from '@/components/spinner';
 import { Error404 } from '@/pages/errors';
-import { fetchOffer } from '@/store/actions';
+import { fetchOffer, setActivePoint } from '@/store/actions';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { offerToPoint, offersToPoints } from '@/utils/offers';
 
@@ -34,6 +34,8 @@ function Offer(): JSX.Element {
     () => (offer ? offerToPoint(offer) : undefined),
     [offer]
   );
+
+  dispatch(setActivePoint(activePoint));
 
   if (offerLoading && !offerError) {
     return <Spinner variant="page" />;
@@ -149,7 +151,6 @@ function Offer(): JSX.Element {
           <Map
             city={offer.city}
             points={activePoint ? [activePoint, ...nearbyPoints] : []}
-            fixedSelectedPoint={activePoint}
           />
         </section>
         <div className="container">

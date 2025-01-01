@@ -24,19 +24,24 @@ function OfferCard({
   const offerPoint = offerToPoint(offer);
   const cardStyle = OFFER_CARD_STYLES[type];
 
+  const handleOfferHover: React.MouseEventHandler<HTMLElement> = (event) => {
+    event.preventDefault();
+    if (mapPointHighlight) {
+      dispatch(setActivePoint(offerPoint));
+    }
+  };
+  const handleOfferLeave: React.MouseEventHandler<HTMLElement> = (event) => {
+    event.preventDefault();
+    if (mapPointHighlight) {
+      dispatch(setActivePoint(undefined));
+    }
+  };
+
   return (
     <article
       className={classNames(cardStyle.cardClassName, 'place-card')}
-      onMouseOver={
-        mapPointHighlight
-          ? () => dispatch(setActivePoint(offerPoint))
-          : undefined
-      }
-      onMouseLeave={
-        mapPointHighlight
-          ? () => dispatch(setActivePoint(undefined))
-          : undefined
-      }
+      onMouseOver={handleOfferHover}
+      onMouseLeave={handleOfferLeave}
     >
       {offer.isPremium ? (
         <div className="place-card__mark">
