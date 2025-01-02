@@ -70,7 +70,11 @@ function OfferCard({
             <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <BookmarkButton marked={type === 'favorites'} />
+          <BookmarkButton
+            variant="card"
+            offer={offer}
+            initialState={type === 'favorites' ? true : offer.isFavorite}
+          />
         </div>
         <Rating
           value={offer.rating}

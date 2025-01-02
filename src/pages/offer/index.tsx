@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
+import BookmarkButton from '@/components/bookmark-button';
 import CommentForm from '@/components/comment-form';
 import Header from '@/components/header';
 import Map from '@/components/map';
@@ -15,7 +16,9 @@ import { offerToPoint, offersToPoints } from '@/utils/offers';
 function Offer(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector((state) => state.userDataReducer.authorizationStatus);
+  const authorizationStatus = useAppSelector(
+    (state) => state.userDataReducer.authorizationStatus
+  );
   const { offer, comments, nearbyOffers, offerLoading, offerError } =
     useAppSelector((state) => state.offerReducer);
 
@@ -77,12 +80,7 @@ function Offer(): JSX.Element {
               ) : null}
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">{offer.title}</h1>
-                <button className="offer__bookmark-button button" type="button">
-                  <svg className="offer__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <BookmarkButton variant='page' offer={offer} initialState={offer.isFavorite}/>
               </div>
               <Rating
                 value={offer.rating}

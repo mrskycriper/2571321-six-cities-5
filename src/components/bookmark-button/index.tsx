@@ -1,20 +1,72 @@
+import classNames from 'classnames';
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
+import { addFavoriteOffer, removeFavoriteOffer } from '@/store/actions';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { OfferShort } from '@/types/offer';
+import { APP_ROUTES } from '@/constants/routes';
+import { BOOKMARK_BUTTON_STYLES } from './constants';
+import { BookmarkButtonVariant } from './types';
+
 type BookmarkButtonProps = {
-  marked: boolean;
+  variant: BookmarkButtonVariant;
+  offer: OfferShort;
+  initialState?: boolean;
 };
 
-function BookmarkButton({ marked }: BookmarkButtonProps): JSX.Element {
+function BookmarkButton({
+  variant,
+  offer,
+  initialState,
+}: BookmarkButtonProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const authorizationStatus = useAppSelector(
+    (state) => state.userDataReducer.authorizationStatus
+  );
+  const [favorite, setFavorite] = useState(initialState || false);
+
+  const handleBookmarkClick = () => {
+    if (authorizationStatus) {
+      if (favorite) {
+        dispatch(removeFavoriteOffer(offer))
+          .unwrap()
+          .then((result) => {
+            if (result) {
+              setFavorite(false);
+            }
+          });
+      } else {
+        dispatch(addFavoriteOffer(offer))
+          .unwrap()
+          .then((result) => {
+            if (result) {
+              setFavorite(true);
+            }
+          });
+      }
+    } else {
+      navigate(APP_ROUTES.LOGIN);
+    }
+  };
+
+  const style = BOOKMARK_BUTTON_STYLES[variant];
+
   return (
     <button
-      className={`place-card__bookmark-button${
-        marked ? ' place-card__bookmark-button--active' : ''
-      } button`}
+      className={classNames(
+        'button',
+        style.buttonClassName,
+        favorite ? `${style.buttonClassName}--active` : null
+      )}
+      onClick={handleBookmarkClick}
       type="button"
     >
-      <svg className="place-card__bookmark-icon" width="18" height="19">
+      <svg className={style.iconClassName} width={style.width} height={style.height}>
         <use xlinkHref="#icon-bookmark"></use>
       </svg>
       <span className="visually-hidden">
-        {marked ? 'To bookmarks' : 'In bookmarks'}
+        {favorite ? 'To bookmarks' : 'In bookmarks'}
       </span>
     </button>
   );
