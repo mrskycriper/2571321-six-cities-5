@@ -20,7 +20,9 @@ function Main(): JSX.Element {
     (state) => state.cityOffersReducer.offers.length
   );
 
-  dispatch(setActivePoint(undefined));
+  useEffect(() => {
+    dispatch(setActivePoint(undefined));
+  }, [dispatch]);
 
   const [offersBlock, setOffersBlock] = useState(<Spinner variant="block" />);
   const [pageClass, setPageClass] = useState('');

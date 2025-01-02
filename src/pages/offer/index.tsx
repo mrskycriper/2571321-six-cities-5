@@ -35,7 +35,9 @@ function Offer(): JSX.Element {
     [offer]
   );
 
-  dispatch(setActivePoint(activePoint));
+  useEffect(() => {
+    dispatch(setActivePoint(activePoint));
+  }, [dispatch, activePoint]);
 
   if (offerLoading && !offerError) {
     return <Spinner variant="page" />;
