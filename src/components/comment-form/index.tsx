@@ -34,6 +34,7 @@ function CommentForm({ offerId }: CommentFormProps): JSX.Element {
     );
   };
 
+  // TODO Oбработка ошибок
   return (
     <form
       className="reviews__form form"

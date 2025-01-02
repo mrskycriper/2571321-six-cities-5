@@ -9,7 +9,7 @@ import { validatePassword } from '@/utils/user';
 function Login(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const authorizationStatus = useAppSelector((state) => state.userReducer.authorizationStatus);
+  const authorizationStatus = useAppSelector((state) => state.userDataReducer.authorizationStatus);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [submitDisabled, setSubmitDisabled] = useState(true);
@@ -41,6 +41,7 @@ function Login(): JSX.Element {
     }
   }, [navigate, authorizationStatus]);
 
+  // TODO Перенаправление на случайный город
   return (
     <div className="page page--gray page--login">
       <Header isLoginPage />

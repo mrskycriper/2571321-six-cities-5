@@ -9,8 +9,8 @@ type HeaderProps = {
 
 function Header({ isLoginPage }: HeaderProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const { authorizationStatus, userData } = useAppSelector(
-    (state) => state.userReducer
+  const { authorizationStatus, userData, favoriteOffers } = useAppSelector(
+    (state) => state.userDataReducer
   );
 
   const handleLogout: React.MouseEventHandler<HTMLAnchorElement> = () => {
@@ -49,7 +49,7 @@ function Header({ isLoginPage }: HeaderProps): JSX.Element {
                         <span className="header__user-name user__name">
                           {userData?.name}
                         </span>
-                        <span className="header__favorite-count">0</span>
+                        <span className="header__favorite-count">{favoriteOffers.length}</span>
                       </Link>
                     </li>
                     <li className="header__nav-item">

@@ -9,7 +9,7 @@ type AuthorizedRouteProps = {
 
 function AuthorizedRoute({ element }: AuthorizedRouteProps): JSX.Element {
   const navigate = useNavigate();
-  const authorizationStatus = useAppSelector((state) => state.userReducer.authorizationStatus);
+  const authorizationStatus = useAppSelector((state) => state.userDataReducer.authorizationStatus);
 
   useEffect(() => {
     if (!authorizationStatus) {

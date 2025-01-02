@@ -1,15 +1,15 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { api } from '@/api';
-import { mapReducer } from './map/reducer';
+import { cityOffersReducer } from './city-offers/reducer';
+import { globalOffersReducer } from './global-offers/reducer';
 import { offerReducer } from './offer/reducer';
-import { offersReducer } from './offers/reducer';
-import { userReducer } from './user/reducer';
+import { userDataReducer } from './user-data/reducer';
 
 const rootReducer = combineReducers({
-  mapReducer,
+  cityOffersReducer,
+  globalOffersReducer,
   offerReducer,
-  offersReducer,
-  userReducer,
+  userDataReducer,
 });
 
 export const store = configureStore({

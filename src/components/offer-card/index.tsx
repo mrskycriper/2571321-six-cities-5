@@ -24,19 +24,24 @@ function OfferCard({
   const offerPoint = offerToPoint(offer);
   const cardStyle = OFFER_CARD_STYLES[type];
 
+  const handleOfferHover: React.MouseEventHandler<HTMLElement> = (event) => {
+    event.preventDefault();
+    if (mapPointHighlight) {
+      dispatch(setActivePoint(offerPoint));
+    }
+  };
+  const handleOfferLeave: React.MouseEventHandler<HTMLElement> = (event) => {
+    event.preventDefault();
+    if (mapPointHighlight) {
+      dispatch(setActivePoint(undefined));
+    }
+  };
+
   return (
     <article
       className={classNames(cardStyle.cardClassName, 'place-card')}
-      onMouseOver={
-        mapPointHighlight
-          ? () => dispatch(setActivePoint(offerPoint))
-          : undefined
-      }
-      onMouseLeave={
-        mapPointHighlight
-          ? () => dispatch(setActivePoint(undefined))
-          : undefined
-      }
+      onMouseOver={handleOfferHover}
+      onMouseLeave={handleOfferLeave}
     >
       {offer.isPremium ? (
         <div className="place-card__mark">
@@ -65,7 +70,11 @@ function OfferCard({
             <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <BookmarkButton marked={type === 'favorites'} />
+          <BookmarkButton
+            variant="card"
+            offer={offer}
+            initialState={type === 'favorites' ? true : offer.isFavorite}
+          />
         </div>
         <Rating
           value={offer.rating}

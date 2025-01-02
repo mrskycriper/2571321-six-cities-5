@@ -9,7 +9,6 @@ import { useAppSelector } from '@/store/hooks';
 type MapProps = {
   city: City;
   points: Point[];
-  fixedSelectedPoint?: Point | undefined;
 };
 
 const defaultCustomIcon = new Icon({
@@ -24,8 +23,8 @@ const currentCustomIcon = new Icon({
   iconAnchor: [13, 39],
 });
 
-function Map({ city, points, fixedSelectedPoint }: MapProps): JSX.Element {
-  const activePoint = useAppSelector((state) => state.mapReducer.activePoint) && fixedSelectedPoint;
+function Map({ city, points }: MapProps): JSX.Element {
+  const activePoint = useAppSelector((state) => state.cityOffersReducer.activePoint);
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);

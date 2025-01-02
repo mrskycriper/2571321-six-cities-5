@@ -1,41 +1,17 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import Map from '@/components/map';
 import OfferCard from '@/components/offer-card';
 import SortingFilter from '@/components/sorting-filter';
-import Spinner from '@/components/spinner';
-import { updateCityOffers } from '@/store/actions';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { useAppSelector } from '@/store/hooks';
 import { offersToPoints } from '@/utils/offers';
 
 function CityOffers(): JSX.Element {
-  const dispatch = useAppDispatch();
-  const globalOffersLoading = useAppSelector(
-    (state) => state.offersReducer.globalOffersLoading
-  );
-  const cityOffersLoading = useAppSelector(
-    (state) => state.offersReducer.cityOffersLoading
-  );
-  const city = useAppSelector((state) => state.offersReducer.city);
-  const cityOffers = useAppSelector((state) => state.offersReducer.cityOffers);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (!globalOffersLoading) {
-      if (cityOffersLoading === 'idle') {
-        dispatch(updateCityOffers());
-      }
-      if (cityOffersLoading === 'done') {
-        setLoading(false);
-      }
-    }
-  }, [globalOffersLoading, cityOffersLoading, dispatch]);
+  const city = useAppSelector((state) => state.cityOffersReducer.city);
+  const cityOffers = useAppSelector((state) => state.cityOffersReducer.offers);
 
   const mapPoints = useMemo(() => offersToPoints(cityOffers), [cityOffers]);
 
-  if (loading) {
-    return <Spinner variant="block" />;
-  }
-
+  // TODO Проверить стиль карты
   return (
     <div className="cities">
       <div className="cities__places-container container">

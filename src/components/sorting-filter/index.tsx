@@ -1,14 +1,14 @@
 import { useState } from 'react';
-import { applySortOrder } from '@/store/actions';
+import { changeSortOrder } from '@/store/actions';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { SortOrder } from '@/types/filter';
 import { sortFilters } from './constants';
 
 function SortingFilter(): JSX.Element {
   const dispatch = useAppDispatch();
-  const sortOrder = useAppSelector((state) => state.offersReducer.sortOrder);
+  const sortOrder = useAppSelector((state) => state.cityOffersReducer.sortOrder);
   const handleFilterChange = (newSortOrder: SortOrder) => {
-    dispatch(applySortOrder(newSortOrder));
+    dispatch(changeSortOrder(newSortOrder));
   };
 
   const [showFilters, setShowFilters] = useState(false);

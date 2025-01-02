@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
+import BookmarkButton from '@/components/bookmark-button';
 import CommentForm from '@/components/comment-form';
 import Header from '@/components/header';
 import Map from '@/components/map';
@@ -8,14 +9,16 @@ import Rating from '@/components/rating';
 import ReviewsList from '@/components/reveiws-list';
 import Spinner from '@/components/spinner';
 import { Error404 } from '@/pages/errors';
-import { fetchOffer } from '@/store/actions';
+import { fetchOffer, setActivePoint } from '@/store/actions';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { offerToPoint, offersToPoints } from '@/utils/offers';
 
 function Offer(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector((state) => state.userReducer.authorizationStatus);
+  const authorizationStatus = useAppSelector(
+    (state) => state.userDataReducer.authorizationStatus
+  );
   const { offer, comments, nearbyOffers, offerLoading, offerError } =
     useAppSelector((state) => state.offerReducer);
 
@@ -35,6 +38,10 @@ function Offer(): JSX.Element {
     [offer]
   );
 
+  useEffect(() => {
+    dispatch(setActivePoint(activePoint));
+  }, [dispatch, activePoint]);
+
   if (offerLoading && !offerError) {
     return <Spinner variant="page" />;
   }
@@ -46,6 +53,9 @@ function Offer(): JSX.Element {
   const selectedImages =
     offer.images.length > 6 ? offer.images.slice(0, 6) : offer.images;
 
+  // TODO Только 3 ближайших предложения
+  // TODO Поправить стиль карты
+  // TODO Только 10 последних комментариев
   return (
     <div className="page">
       <Header />
@@ -73,12 +83,7 @@ function Offer(): JSX.Element {
               ) : null}
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">{offer.title}</h1>
-                <button className="offer__bookmark-button button" type="button">
-                  <svg className="offer__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <BookmarkButton variant='page' offer={offer} initialState={offer.isFavorite}/>
               </div>
               <Rating
                 value={offer.rating}
@@ -149,7 +154,6 @@ function Offer(): JSX.Element {
           <Map
             city={offer.city}
             points={activePoint ? [activePoint, ...nearbyPoints] : []}
-            fixedSelectedPoint={activePoint}
           />
         </section>
         <div className="container">

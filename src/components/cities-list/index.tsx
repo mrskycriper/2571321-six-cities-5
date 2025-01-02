@@ -1,13 +1,13 @@
 import { CITIES } from '@/constants/cities';
-import { applyCity } from '@/store/actions';
+import { changeCity } from '@/store/actions';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { City } from '@/types/city';
 
 function CitiesList(): JSX.Element {
   const dispatch = useAppDispatch();
-  const city = useAppSelector((state) => state.offersReducer.city);
+  const city = useAppSelector((state) => state.cityOffersReducer.city);
   const handleCityChange = (newCity: City) => {
-    dispatch(applyCity(newCity));
+    dispatch(changeCity(newCity));
   };
 
   return (
