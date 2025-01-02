@@ -1,13 +1,14 @@
 import { useMemo } from 'react';
 import OfferCard from '@/components/offer-card';
+import { useAppSelector } from '@/store/hooks';
 import { CityName } from '@/types/city';
 import { OfferShort } from '@/types/offer';
 
-type FavoriteOffersProps = {
-  offers: OfferShort[];
-};
+function FavoriteOffers(): JSX.Element {
+  const offers = useAppSelector(
+    (state) => state.userDataReducer.favoriteOffers
+  );
 
-function FavoriteOffers({ offers }: FavoriteOffersProps): JSX.Element {
   const cityOffersMap = useMemo(() => {
     const map: Partial<Record<CityName, OfferShort[]>> = {};
 
