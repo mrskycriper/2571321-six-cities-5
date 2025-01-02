@@ -53,6 +53,9 @@ function Offer(): JSX.Element {
   const selectedImages =
     offer.images.length > 6 ? offer.images.slice(0, 6) : offer.images;
 
+  // TODO Только 3 ближайших предложения
+  // TODO Поправить стиль карты
+  // TODO Только 10 последних комментариев
   return (
     <div className="page">
       <Header />

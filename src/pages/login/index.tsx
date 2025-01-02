@@ -41,6 +41,7 @@ function Login(): JSX.Element {
     }
   }, [navigate, authorizationStatus]);
 
+  // TODO Перенаправление на случайный город
   return (
     <div className="page page--gray page--login">
       <Header isLoginPage />
