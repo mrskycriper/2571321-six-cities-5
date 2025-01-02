@@ -4,7 +4,7 @@ import { AsyncThunkConfig } from '@/store/types';
 import { AuthInfo, UserLong } from '@/types/user';
 import { clearToken, setToken } from '@/utils/user';
 
-export const userActions = {
+export const userDataActions = {
   SET_AUTHORIZATION_STATUS: 'authorizationStatus/set',
   SET_USER_DATA: 'userData/set',
   SET_USER_LOADING: 'userLoading/set',
@@ -14,19 +14,19 @@ export const userActions = {
 };
 
 export const setAuthorizationStatus = createAction<boolean>(
-  userActions.SET_AUTHORIZATION_STATUS
+  userDataActions.SET_AUTHORIZATION_STATUS
 );
 
 export const setUserData = createAction<UserLong | null>(
-  userActions.SET_USER_DATA
+  userDataActions.SET_USER_DATA
 );
 
 export const setUserLoading = createAction<boolean>(
-  userActions.SET_USER_LOADING
+  userDataActions.SET_USER_LOADING
 );
 
 export const validateUser = createAsyncThunk<void, void, AsyncThunkConfig>(
-  userActions.VALIDATE_USER,
+  userDataActions.VALIDATE_USER,
   async (_, thunkApi) => {
     try {
       const response = await thunkApi.extra.api.get<UserLong>(
@@ -44,7 +44,7 @@ export const validateUser = createAsyncThunk<void, void, AsyncThunkConfig>(
 );
 
 export const login = createAsyncThunk<void, AuthInfo, AsyncThunkConfig>(
-  userActions.LOGIN,
+  userDataActions.LOGIN,
   async (credentials, thunkApi) => {
     thunkApi.dispatch(setUserLoading(true));
     try {
@@ -64,7 +64,7 @@ export const login = createAsyncThunk<void, AuthInfo, AsyncThunkConfig>(
 );
 
 export const logout = createAsyncThunk<void, void, AsyncThunkConfig>(
-  userActions.LOGOUT,
+  userDataActions.LOGOUT,
   async (_, thunkApi) => {
     thunkApi.dispatch(setUserLoading(true));
     await thunkApi.extra.api.delete(API_ROUTES.USER.LOGOUT);

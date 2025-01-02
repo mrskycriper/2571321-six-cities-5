@@ -2,20 +2,20 @@ import { createSlice } from '@reduxjs/toolkit';
 import { UserLong } from '@/types/user';
 import { setAuthorizationStatus, setUserData, setUserLoading } from './actions';
 
-type UserState = {
+type UserDataState = {
   authorizationStatus: boolean;
   userData: UserLong | null;
   userLoading: boolean;
 };
 
-const initialState: UserState = {
+const initialState: UserDataState = {
   authorizationStatus: false,
   userData: null,
   userLoading: true,
 };
 
-const userSlice = createSlice({
-  name: 'user',
+const userDataSlice = createSlice({
+  name: 'userData',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -32,4 +32,4 @@ const userSlice = createSlice({
   },
 });
 
-export const { reducer: userReducer } = userSlice;
+export const { reducer: userDataReducer } = userDataSlice;

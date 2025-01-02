@@ -3,13 +3,13 @@ import { api } from '@/api';
 import { cityOffersReducer } from './city-offers/reducer';
 import { globalOffersReducer } from './global-offers/reducer';
 import { offerReducer } from './offer/reducer';
-import { userReducer } from './user/reducer';
+import { userDataReducer } from './user-data/reducer';
 
 const rootReducer = combineReducers({
   cityOffersReducer,
   globalOffersReducer,
   offerReducer,
-  userReducer,
+  userDataReducer,
 });
 
 export const store = configureStore({

@@ -10,7 +10,7 @@ type HeaderProps = {
 function Header({ isLoginPage }: HeaderProps): JSX.Element {
   const dispatch = useAppDispatch();
   const { authorizationStatus, userData } = useAppSelector(
-    (state) => state.userReducer
+    (state) => state.userDataReducer
   );
 
   const handleLogout: React.MouseEventHandler<HTMLAnchorElement> = () => {
