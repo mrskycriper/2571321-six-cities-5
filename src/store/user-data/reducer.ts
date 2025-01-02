@@ -1,17 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { APIErrorResponse } from '@/api';
+import { OfferShort } from '@/types/offer';
 import { UserLong } from '@/types/user';
-import { setAuthorizationStatus, setUserData, setUserLoading } from './actions';
+import {
+  setAuthorizationStatus,
+  setUserData,
+  setUserLoading,
+  setFavoriteOffers,
+  setFavoriteOffersError,
+} from './actions';
 
 type UserDataState = {
   authorizationStatus: boolean;
   userData: UserLong | null;
   userLoading: boolean;
+  favoriteOffers: OfferShort[];
+  favoriteOffersError: APIErrorResponse | null;
 };
 
 const initialState: UserDataState = {
   authorizationStatus: false,
   userData: null,
   userLoading: true,
+  favoriteOffers: [],
+  favoriteOffersError: null,
 };
 
 const userDataSlice = createSlice({
@@ -28,6 +40,12 @@ const userDataSlice = createSlice({
       })
       .addCase(setUserLoading, (state, action) => {
         state.userLoading = action.payload;
+      })
+      .addCase(setFavoriteOffers, (state, action) => {
+        state.favoriteOffers = action.payload;
+      })
+      .addCase(setFavoriteOffersError, (state, action) => {
+        state.favoriteOffersError = action.payload;
       });
   },
 });
