@@ -1,3 +1,7 @@
+export const BACKEND_URL = 'https://14.design.htmlacademy.pro/six-cities/';
+
+export const REQUEST_TIMEOUT = 5000;
+
 export const API_ROUTES = {
   OFFERS: {
     GET_GLOBAL: '/offers',
