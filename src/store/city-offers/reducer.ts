@@ -7,7 +7,7 @@ import { OfferShort } from '@/types/offer';
 import { Point } from '@/types/point';
 import { setOffers, setLoading, setCity, setSortOrder, setActivePoint } from './actions';
 
-type CityOffersState = {
+export type CityOffersState = {
   offers: OfferShort[];
   loading: LoadingState;
   city: City;

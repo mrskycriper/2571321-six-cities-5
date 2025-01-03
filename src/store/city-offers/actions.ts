@@ -13,9 +13,6 @@ export const CityOffersActions = {
   SET_CITY: 'city/set',
   SET_SORT_ORDER: 'sortOrder/set',
   SET_ACTIVE_POINT: 'activePoint/set',
-  CHANGE_CITY: 'city/change',
-  CHANGE_SORT_ORDER: 'sortOrder/change',
-  UPDATE_OFFERS: 'cityOffers/update',
 };
 
 export const setOffers = createAction<OfferShort[]>(
